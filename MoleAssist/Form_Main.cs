@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace MoleAssist
-{
+{ 
     public partial class form_Main : Form
     {
+        private FightManager GlobalFight = new FightManager( ConfigManager.Get("lua") );
         public form_Main()
         {
             InitializeComponent();
         }
-
+        
         private void radio_modeSelect1Changed(object sender, EventArgs e)
         {
 
@@ -35,18 +31,18 @@ namespace MoleAssist
         private void combo_skillMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (combo_skillMode.SelectedIndex == 0) {
-                textbox_SkillOrder.ReadOnly =true;
+                textbox_SkillOrder.Enabled = false;
             }
             else
             {
-                textbox_SkillOrder.ReadOnly = false;
+                textbox_SkillOrder.Enabled = true;
             }
         }
 
         private void form_Main_Load(object sender, EventArgs e)
         {
-            combo_skillMode.Text = "单技能";
-            combo_autoIdentifyFailed.Text = "弹出窗口";
+            combo_skillMode.SelectedIndex = 0;
+            combo_autoIdentifyFailed.SelectedIndex = 0;
         }
 
         private void checkBox_qucikTraining_CheckedChanged(object sender, EventArgs e)
@@ -72,7 +68,7 @@ namespace MoleAssist
 
         private void btn_start_Click(object sender, EventArgs e)
         {
-            if (!FightControl.isFighting)
+            if (!GlobalFight.IsFighting)
             {
                 if (textBox_interval.Text == "")
                 {
@@ -106,19 +102,35 @@ namespace MoleAssist
 
                 }
                 MessageBox.Show("请期待正式版辅助放出~");
-                //开启刷怪线程，传入参数3    ps：1为刷野怪，2为npc忍者   3为自定义
-                // new Thread..
+                //开启刷怪线程，传入参数    ps：1为刷野怪，2为npc忍者   3为自定义
+                GlobalFight.Start();
                 btn_start.Text = "结束";
             }
             else {
-                //暂停线程
+                GlobalFight.Stop();
                 btn_start.Text = "开始";
             }
         }
 
+        bool isGetting = false;
         private void btn_getxy_Click(object sender, EventArgs e)
         {
-
+            if (isGetting)
+                return ;
+            isGetting = true;
+            MessageBox.Show("请在3秒内把鼠标移到要获取的坐标");
+            Thread t = new Thread(o => Thread.Sleep(3000));
+            t.Start(this);
+            while (t.IsAlive)
+            {
+                Application.DoEvents();
+            }
+            Point point = webBrowser_game.PointToClient(MousePosition);
+            textBox_customX.Text = point.X.ToString();
+            textBox_customY.Text = point.Y.ToString();
+            MessageBox.Show("获取成功！" + point.ToString() );
+            Properties.Settings.Default.customPoint = point;
+            isGetting = false;
         }
 
 
@@ -140,5 +152,9 @@ namespace MoleAssist
             p.StandardInput.WriteLine("exit");
         }
 
+        private void form_Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
     }
 }

@@ -22,5 +22,134 @@ namespace MoleAssist.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public string FightInterval {
+            get {
+                return ((string)(this["FightInterval"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SkillOrder {
+            get {
+                return ((string)(this["SkillOrder"]));
+            }
+            set {
+                this["SkillOrder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isAutoIdentify {
+            get {
+                return ((bool)(this["isAutoIdentify"]));
+            }
+            set {
+                this["isAutoIdentify"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int autoIdentifyFailed {
+            get {
+                return ((int)(this["autoIdentifyFailed"]));
+            }
+            set {
+                this["autoIdentifyFailed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ReHP {
+            get {
+                return ((bool)(this["ReHP"]));
+            }
+            set {
+                this["ReHP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool useAnger {
+            get {
+                return ((bool)(this["useAnger"]));
+            }
+            set {
+                this["useAnger"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alert {
+            get {
+                return ((bool)(this["alert"]));
+            }
+            set {
+                this["alert"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool qucikTraining {
+            get {
+                return ((bool)(this["qucikTraining"]));
+            }
+            set {
+                this["qucikTraining"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool couldHiddenMode {
+            get {
+                return ((bool)(this["couldHiddenMode"]));
+            }
+            set {
+                this["couldHiddenMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point customPoint {
+            get {
+                return ((global::System.Drawing.Point)(this["CustomPoint"]));
+            }
+            set {
+                this["CustomPoint"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OnTop {
+            get {
+                return ((bool)(this["OnTop"]));
+            }
+            set {
+                this["OnTop"] = value;
+            }
+        }
     }
 }
