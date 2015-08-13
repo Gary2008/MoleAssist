@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigException.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="FightManager.cs" />
     <Compile Include="form_Main.cs">

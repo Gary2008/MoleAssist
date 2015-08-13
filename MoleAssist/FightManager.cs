@@ -1,8 +1,9 @@
 ﻿using NLua;
 using System;
 using System.Drawing;
+using settings = MoleAssist.Properties.Settings;
 
-namespace MoleAssist
+namespace Fight
 {
     public class FightManager
     {
@@ -14,7 +15,7 @@ namespace MoleAssist
         
         public FightManager(string lua) {
             IsFighting = false;
-            CustomPoint = Properties.Settings.Default.customPoint;
+            CustomPoint = settings.Default.customPoint;
             luaScript_ = lua;
             state_ = new Lua();
             //TODO: 注册LUA函数

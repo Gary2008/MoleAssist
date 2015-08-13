@@ -1,15 +1,20 @@
-﻿using System;
+﻿using Config;
+using Fight;
+using System;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace MoleAssist
 { 
     public partial class form_Main : Form
     {
-        private FightManager GlobalFight = new FightManager( ConfigManager.Get("lua") );
+        private static string lua;
+        private FightManager GlobalFight;
         public form_Main()
         {
+            lua = ConfigManager.Get(Config.Item.Lua);
+            GlobalFight = new FightManager(lua);
             InitializeComponent();
         }
         
