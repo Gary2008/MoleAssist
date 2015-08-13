@@ -2,7 +2,7 @@
 
 namespace Config
 {
-    class ConfigException : System.ApplicationException
+    class ConfigException : ApplicationException
     {
         public ConfigException() : base()
         {

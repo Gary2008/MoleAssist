@@ -1,6 +1,7 @@
 ﻿using Config;
 using Fight;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -13,11 +14,31 @@ namespace MoleAssist
         private FightManager GlobalFight;
         public Form_Main()
         {
-            lua = ConfigManager.Get(Config.Item.Lua);
+            lua = ConfigManager.GetLuaScript();
             GlobalFight = new FightManager(lua);
             InitializeComponent();
         }
-        
+
+        private void Form_Main_Load(object sender, EventArgs e)
+        {
+            combo_skillMode.SelectedIndex = 0;
+            combo_autoIdentifyFailed.SelectedIndex = 0;
+            List<Config.Functions> enabledFunctions = (List<Config.Functions>) ConfigManager.Get(Config.Item.Functions);
+            foreach (Config.Functions func in enabledFunctions)
+            {
+                switch (func)
+                {
+                    case Functions.AutoFight:
+                        //TODO: 显示刷怪区
+                        break;
+                    case Functions.Notice:
+                        //TODO: 显示公告区
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         private void radio_modeSelect2_CheckedChanged(object sender, EventArgs e)
         {
@@ -40,12 +61,6 @@ namespace MoleAssist
             {
                 textbox_SkillOrder.Enabled = true;
             }
-        }
-
-        private void Form_Main_Load(object sender, EventArgs e)
-        {
-            combo_skillMode.SelectedIndex = 0;
-            combo_autoIdentifyFailed.SelectedIndex = 0;
         }
 
         private void checkBox_qucikTraining_CheckedChanged(object sender, EventArgs e)

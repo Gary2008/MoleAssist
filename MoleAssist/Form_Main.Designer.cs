@@ -33,6 +33,12 @@
             this.label_skillOrder = new System.Windows.Forms.Label();
             this.combo_skillMode = new System.Windows.Forms.ComboBox();
             this.combo_autoIdentifyFailed = new System.Windows.Forms.ComboBox();
+            this.checkBox_alert = new System.Windows.Forms.CheckBox();
+            this.checkBox_qucikTraining = new System.Windows.Forms.CheckBox();
+            this.checkBox_isAutoIdentify = new System.Windows.Forms.CheckBox();
+            this.checkBox_useAnger = new System.Windows.Forms.CheckBox();
+            this.checkBox_couldHiddenMode = new System.Windows.Forms.CheckBox();
+            this.checkBox_ReHP = new System.Windows.Forms.CheckBox();
             this.radio_modeSelect1 = new System.Windows.Forms.RadioButton();
             this.radio_modeSelect2 = new System.Windows.Forms.RadioButton();
             this.radio_modeSelect3 = new System.Windows.Forms.RadioButton();
@@ -41,6 +47,7 @@
             this.btn_start = new System.Windows.Forms.Button();
             this.tabControl_Main = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox_interval = new System.Windows.Forms.TextBox();
             this.textBox_customY = new System.Windows.Forms.TextBox();
             this.textBox_customX = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -52,13 +59,6 @@
             this.btn_clearCache = new System.Windows.Forms.Button();
             this.btn_refreshGame = new System.Windows.Forms.Button();
             this.checkBox_onTop = new System.Windows.Forms.CheckBox();
-            this.textBox_interval = new System.Windows.Forms.TextBox();
-            this.checkBox_alert = new System.Windows.Forms.CheckBox();
-            this.checkBox_qucikTraining = new System.Windows.Forms.CheckBox();
-            this.checkBox_isAutoIdentify = new System.Windows.Forms.CheckBox();
-            this.checkBox_useAnger = new System.Windows.Forms.CheckBox();
-            this.checkBox_couldHiddenMode = new System.Windows.Forms.CheckBox();
-            this.checkBox_ReHP = new System.Windows.Forms.CheckBox();
             this.groupBox_fightOptions.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -130,6 +130,82 @@
             this.combo_autoIdentifyFailed.Size = new System.Drawing.Size(72, 20);
             this.combo_autoIdentifyFailed.TabIndex = 5;
             // 
+            // checkBox_alert
+            // 
+            this.checkBox_alert.AutoSize = true;
+            this.checkBox_alert.Checked = global::MoleAssist.Properties.Settings.Default.alert;
+            this.checkBox_alert.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "alert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_alert.Location = new System.Drawing.Point(156, 58);
+            this.checkBox_alert.Name = "checkBox_alert";
+            this.checkBox_alert.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_alert.TabIndex = 4;
+            this.checkBox_alert.Text = "异常鸣笛";
+            this.checkBox_alert.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_qucikTraining
+            // 
+            this.checkBox_qucikTraining.AutoSize = true;
+            this.checkBox_qucikTraining.Checked = global::MoleAssist.Properties.Settings.Default.qucikTraining;
+            this.checkBox_qucikTraining.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "qucikTraining", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_qucikTraining.Location = new System.Drawing.Point(6, 73);
+            this.checkBox_qucikTraining.Name = "checkBox_qucikTraining";
+            this.checkBox_qucikTraining.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_qucikTraining.TabIndex = 3;
+            this.checkBox_qucikTraining.Text = "精灵带练";
+            this.checkBox_qucikTraining.UseVisualStyleBackColor = true;
+            this.checkBox_qucikTraining.CheckedChanged += new System.EventHandler(this.checkBox_qucikTraining_CheckedChanged);
+            // 
+            // checkBox_isAutoIdentify
+            // 
+            this.checkBox_isAutoIdentify.AutoSize = true;
+            this.checkBox_isAutoIdentify.Checked = global::MoleAssist.Properties.Settings.Default.isAutoIdentify;
+            this.checkBox_isAutoIdentify.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "isAutoIdentify", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_isAutoIdentify.Location = new System.Drawing.Point(6, 36);
+            this.checkBox_isAutoIdentify.Name = "checkBox_isAutoIdentify";
+            this.checkBox_isAutoIdentify.Size = new System.Drawing.Size(156, 16);
+            this.checkBox_isAutoIdentify.TabIndex = 2;
+            this.checkBox_isAutoIdentify.Text = "自动过验证，不能识别时";
+            this.checkBox_isAutoIdentify.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_useAnger
+            // 
+            this.checkBox_useAnger.AutoSize = true;
+            this.checkBox_useAnger.Checked = global::MoleAssist.Properties.Settings.Default.useAnger;
+            this.checkBox_useAnger.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_useAnger.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "useAnger", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_useAnger.Location = new System.Drawing.Point(84, 58);
+            this.checkBox_useAnger.Name = "checkBox_useAnger";
+            this.checkBox_useAnger.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_useAnger.TabIndex = 1;
+            this.checkBox_useAnger.Text = "自动放怒";
+            this.checkBox_useAnger.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_couldHiddenMode
+            // 
+            this.checkBox_couldHiddenMode.AutoSize = true;
+            this.checkBox_couldHiddenMode.Checked = global::MoleAssist.Properties.Settings.Default.couldHiddenMode;
+            this.checkBox_couldHiddenMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_couldHiddenMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "couldHiddenMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_couldHiddenMode.Location = new System.Drawing.Point(84, 73);
+            this.checkBox_couldHiddenMode.Name = "checkBox_couldHiddenMode";
+            this.checkBox_couldHiddenMode.Size = new System.Drawing.Size(84, 16);
+            this.checkBox_couldHiddenMode.TabIndex = 9;
+            this.checkBox_couldHiddenMode.Text = "可后台模式";
+            this.checkBox_couldHiddenMode.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_ReHP
+            // 
+            this.checkBox_ReHP.AutoSize = true;
+            this.checkBox_ReHP.Checked = global::MoleAssist.Properties.Settings.Default.ReHP;
+            this.checkBox_ReHP.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_ReHP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "ReHP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_ReHP.Location = new System.Drawing.Point(6, 58);
+            this.checkBox_ReHP.Name = "checkBox_ReHP";
+            this.checkBox_ReHP.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_ReHP.TabIndex = 0;
+            this.checkBox_ReHP.Text = "自动回血";
+            this.checkBox_ReHP.UseVisualStyleBackColor = true;
+            // 
             // radio_modeSelect1
             // 
             this.radio_modeSelect1.AutoSize = true;
@@ -141,7 +217,6 @@
             this.radio_modeSelect1.TabStop = true;
             this.radio_modeSelect1.Text = "野      怪";
             this.radio_modeSelect1.UseVisualStyleBackColor = true;
-
             // 
             // radio_modeSelect2
             // 
@@ -236,6 +311,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "自动刷怪";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox_interval
+            // 
+            this.textBox_interval.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MoleAssist.Properties.Settings.Default, "FightInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_interval.Location = new System.Drawing.Point(115, 5);
+            this.textBox_interval.Name = "textBox_interval";
+            this.textBox_interval.Size = new System.Drawing.Size(30, 21);
+            this.textBox_interval.TabIndex = 16;
+            this.textBox_interval.Text = global::MoleAssist.Properties.Settings.Default.FightInterval;
+            this.textBox_interval.Visible = false;
             // 
             // textBox_customY
             // 
@@ -352,96 +437,11 @@
             this.checkBox_onTop.UseVisualStyleBackColor = true;
             this.checkBox_onTop.CheckedChanged += new System.EventHandler(this.checkBox_onTop_CheckedChanged);
             // 
-            // textBox_interval
-            // 
-            this.textBox_interval.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MoleAssist.Properties.Settings.Default, "FightInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_interval.Location = new System.Drawing.Point(115, 5);
-            this.textBox_interval.Name = "textBox_interval";
-            this.textBox_interval.Size = new System.Drawing.Size(30, 21);
-            this.textBox_interval.TabIndex = 16;
-            this.textBox_interval.Text = global::MoleAssist.Properties.Settings.Default.FightInterval;
-            this.textBox_interval.Visible = false;
-            // 
-            // checkBox_alert
-            // 
-            this.checkBox_alert.AutoSize = true;
-            this.checkBox_alert.Checked = global::MoleAssist.Properties.Settings.Default.alert;
-            this.checkBox_alert.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "alert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_alert.Location = new System.Drawing.Point(156, 58);
-            this.checkBox_alert.Name = "checkBox_alert";
-            this.checkBox_alert.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_alert.TabIndex = 4;
-            this.checkBox_alert.Text = "异常鸣笛";
-            this.checkBox_alert.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_qucikTraining
-            // 
-            this.checkBox_qucikTraining.AutoSize = true;
-            this.checkBox_qucikTraining.Checked = global::MoleAssist.Properties.Settings.Default.qucikTraining;
-            this.checkBox_qucikTraining.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "qucikTraining", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_qucikTraining.Location = new System.Drawing.Point(6, 73);
-            this.checkBox_qucikTraining.Name = "checkBox_qucikTraining";
-            this.checkBox_qucikTraining.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_qucikTraining.TabIndex = 3;
-            this.checkBox_qucikTraining.Text = "精灵带练";
-            this.checkBox_qucikTraining.UseVisualStyleBackColor = true;
-            this.checkBox_qucikTraining.CheckedChanged += new System.EventHandler(this.checkBox_qucikTraining_CheckedChanged);
-            // 
-            // checkBox_isAutoIdentify
-            // 
-            this.checkBox_isAutoIdentify.AutoSize = true;
-            this.checkBox_isAutoIdentify.Checked = global::MoleAssist.Properties.Settings.Default.isAutoIdentify;
-            this.checkBox_isAutoIdentify.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "isAutoIdentify", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_isAutoIdentify.Location = new System.Drawing.Point(6, 36);
-            this.checkBox_isAutoIdentify.Name = "checkBox_isAutoIdentify";
-            this.checkBox_isAutoIdentify.Size = new System.Drawing.Size(156, 16);
-            this.checkBox_isAutoIdentify.TabIndex = 2;
-            this.checkBox_isAutoIdentify.Text = "自动过验证，不能识别时";
-            this.checkBox_isAutoIdentify.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_useAnger
-            // 
-            this.checkBox_useAnger.AutoSize = true;
-            this.checkBox_useAnger.Checked = global::MoleAssist.Properties.Settings.Default.useAnger;
-            this.checkBox_useAnger.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_useAnger.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "useAnger", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_useAnger.Location = new System.Drawing.Point(84, 58);
-            this.checkBox_useAnger.Name = "checkBox_useAnger";
-            this.checkBox_useAnger.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_useAnger.TabIndex = 1;
-            this.checkBox_useAnger.Text = "自动放怒";
-            this.checkBox_useAnger.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_couldHiddenMode
-            // 
-            this.checkBox_couldHiddenMode.AutoSize = true;
-            this.checkBox_couldHiddenMode.Checked = global::MoleAssist.Properties.Settings.Default.couldHiddenMode;
-            this.checkBox_couldHiddenMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_couldHiddenMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "couldHiddenMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_couldHiddenMode.Location = new System.Drawing.Point(84, 73);
-            this.checkBox_couldHiddenMode.Name = "checkBox_couldHiddenMode";
-            this.checkBox_couldHiddenMode.Size = new System.Drawing.Size(84, 16);
-            this.checkBox_couldHiddenMode.TabIndex = 9;
-            this.checkBox_couldHiddenMode.Text = "可后台模式";
-            this.checkBox_couldHiddenMode.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_ReHP
-            // 
-            this.checkBox_ReHP.AutoSize = true;
-            this.checkBox_ReHP.Checked = global::MoleAssist.Properties.Settings.Default.ReHP;
-            this.checkBox_ReHP.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_ReHP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "ReHP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_ReHP.Location = new System.Drawing.Point(6, 58);
-            this.checkBox_ReHP.Name = "checkBox_ReHP";
-            this.checkBox_ReHP.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_ReHP.TabIndex = 0;
-            this.checkBox_ReHP.Text = "自动回血";
-            this.checkBox_ReHP.UseVisualStyleBackColor = true;
-            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1201, 785);
             this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.tabControl_Main);
