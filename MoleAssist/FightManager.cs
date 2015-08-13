@@ -19,7 +19,6 @@ namespace Fight
             luaScript_ = lua;
             state_ = new Lua();
             //TODO: 注册LUA函数
-            // state_.RegisterLuaDelegateType(...);
 
         }
 
@@ -30,7 +29,9 @@ namespace Fight
 
         public bool Start() {
             if (IsFighting)
+            {
                 return false;
+            }
             IsFighting = true;
             //TODO: start fight processing
             throw new NotImplementedException();
@@ -38,7 +39,9 @@ namespace Fight
         public bool Stop()
         {
             if (!IsFighting)
+            {
                 return true;
+            }
             IsFighting = true;
             //TODO: stop fight processing
 

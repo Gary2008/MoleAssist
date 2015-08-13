@@ -84,17 +84,17 @@
     <Compile Include="ConfigException.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="FightManager.cs" />
-    <Compile Include="form_Main.cs">
+    <Compile Include="Form_Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form_Main.Designer.cs">
-      <DependentUpon>form_Main.cs</DependentUpon>
+    <Compile Include="Form_Main.Designer.cs">
+      <DependentUpon>Form_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="piccolor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="form_Main.resx">
-      <DependentUpon>form_Main.cs</DependentUpon>
+    <EmbeddedResource Include="Form_Main.resx">
+      <DependentUpon>Form_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -29,7 +29,9 @@ namespace Config
 #if DEBUG && openLocalConfig
             string local =  Directory.GetCurrentDirectory() + "/LocalConfig" ;
             if (Directory.Exists(local))
+            {
                 Load("file:///" + local);
+            }
 #endif
         }
 
@@ -68,7 +70,9 @@ namespace Config
         public static string Get(Item item)
         {
             if (!loaded_)
+            {
                 Load();
+            }
             //TODO: 返回配置项
             if (item == Item.Lua)
             {
@@ -80,7 +84,9 @@ namespace Config
         public static string Get(uint id)
         {
             if (!loaded_)
+            {
                 Load();
+            }
             //TODO: 返回配置项
 
             throw new NotImplementedException();
@@ -89,7 +95,9 @@ namespace Config
         public static string Get(string item)
         {
             if (!loaded_)
+            {
                 Load();
+            }
             //TODO: 返回配置项
             throw new NotImplementedException();
         }
@@ -97,9 +105,11 @@ namespace Config
         public static string Get(string item, string name)
         {
             if (!loaded_)
+            {
                 Load();
+            }
             //TODO: 返回配置项
-            
+
             throw new NotImplementedException();
         }
 
@@ -138,8 +148,7 @@ namespace Config
                         request = WebRequest.Create(remote_ + requestFile) as FileWebRequest;
                         break;
                     default:
-                        throw new Exception("Your mother boom");
-                        break;
+                        throw new ConfigFetchException("UnkownProtocol");
                 }
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;

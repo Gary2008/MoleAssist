@@ -13,7 +13,7 @@ namespace MoleAssist
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new form_Main());
+            Application.Run(new Form_Main());
         }
     }
 }

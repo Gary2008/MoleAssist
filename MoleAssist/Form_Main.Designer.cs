@@ -1,6 +1,6 @@
 ﻿namespace MoleAssist
 {
-    partial class form_Main
+    partial class Form_Main
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -141,7 +141,7 @@
             this.radio_modeSelect1.TabStop = true;
             this.radio_modeSelect1.Text = "野      怪";
             this.radio_modeSelect1.UseVisualStyleBackColor = true;
-            this.radio_modeSelect1.CheckedChanged += new System.EventHandler(this.radio_modeSelect1Changed);
+
             // 
             // radio_modeSelect2
             // 
@@ -438,7 +438,7 @@
             this.checkBox_ReHP.Text = "自动回血";
             this.checkBox_ReHP.UseVisualStyleBackColor = true;
             // 
-            // form_Main
+            // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -448,10 +448,10 @@
             this.Controls.Add(this.webBrowser_game);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "form_Main";
+            this.Name = "Form_Main";
             this.Text = "约瑟传说鼹鼠辅助";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.form_Main_FormClosed);
-            this.Load += new System.EventHandler(this.form_Main_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_Main_FormClosed);
+            this.Load += new System.EventHandler(this.Form_Main_Load);
             this.groupBox_fightOptions.ResumeLayout(false);
             this.groupBox_fightOptions.PerformLayout();
             this.tabControl_Main.ResumeLayout(false);

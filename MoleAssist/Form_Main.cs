@@ -7,21 +7,17 @@ using System.Windows.Forms;
 
 namespace MoleAssist
 { 
-    public partial class form_Main : Form
+    public partial class Form_Main : Form
     {
         private static string lua;
         private FightManager GlobalFight;
-        public form_Main()
+        public Form_Main()
         {
             lua = ConfigManager.Get(Config.Item.Lua);
             GlobalFight = new FightManager(lua);
             InitializeComponent();
         }
         
-        private void radio_modeSelect1Changed(object sender, EventArgs e)
-        {
-
-        }
 
         private void radio_modeSelect2_CheckedChanged(object sender, EventArgs e)
         {
@@ -30,7 +26,9 @@ namespace MoleAssist
 
         private void radio_modeSelect3_CheckedChanged(object sender, EventArgs e)
         {
-            btn_getxy.Visible = textBox_customX.Visible = textBox_customY.Visible = radio_modeSelect3.Checked;
+            btn_getxy.Visible = radio_modeSelect3.Checked; 
+            textBox_customX.Visible = radio_modeSelect3.Checked;
+            textBox_customY.Visible = radio_modeSelect3.Checked;
         }
 
         private void combo_skillMode_SelectedIndexChanged(object sender, EventArgs e)
@@ -44,7 +42,7 @@ namespace MoleAssist
             }
         }
 
-        private void form_Main_Load(object sender, EventArgs e)
+        private void Form_Main_Load(object sender, EventArgs e)
         {
             combo_skillMode.SelectedIndex = 0;
             combo_autoIdentifyFailed.SelectedIndex = 0;
@@ -121,7 +119,9 @@ namespace MoleAssist
         private void btn_getxy_Click(object sender, EventArgs e)
         {
             if (isGetting)
-                return ;
+            {
+                return;
+            }
             isGetting = true;
             MessageBox.Show("请在3秒内把鼠标移到要获取的坐标");
             Thread t = new Thread(o => Thread.Sleep(3000));
@@ -157,7 +157,7 @@ namespace MoleAssist
             p.StandardInput.WriteLine("exit");
         }
 
-        private void form_Main_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form_Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.Save();
         }
