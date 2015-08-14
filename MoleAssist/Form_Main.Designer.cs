@@ -332,7 +332,9 @@
             // textBox_customY
             // 
             this.textBox_customY.Location = new System.Drawing.Point(137, 71);
+            this.textBox_customY.MaxLength = 6;
             this.textBox_customY.Name = "textBox_customY";
+            this.textBox_customY.ReadOnly = true;
             this.textBox_customY.Size = new System.Drawing.Size(29, 21);
             this.textBox_customY.TabIndex = 15;
             this.textBox_customY.Visible = false;
@@ -341,7 +343,9 @@
             // textBox_customX
             // 
             this.textBox_customX.Location = new System.Drawing.Point(104, 71);
+            this.textBox_customX.MaxLength = 6;
             this.textBox_customX.Name = "textBox_customX";
+            this.textBox_customX.ReadOnly = true;
             this.textBox_customX.Size = new System.Drawing.Size(29, 21);
             this.textBox_customX.TabIndex = 14;
             this.textBox_customX.Visible = false;
