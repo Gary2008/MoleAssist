@@ -83,52 +83,65 @@ namespace MoleAssist
             this.TopMost = this.checkBox_onTop.Checked;
         }
 
+        private bool changing = false; 
         private void btn_start_Click(object sender, EventArgs e)
         {
-            FightType type = new FightType();
-            if (!GlobalFight.IsFighting)
+            if (changing)
             {
-                //此时GlobalFight.IsFighting为假，需要开始
-                if (radio_modeSelect1.Checked)
-                {
-                    //TODO: 1.刷野怪 的处理
-                    type = FightType.Wild;
-                }
-                else if (radio_modeSelect2.Checked)
-                {
-                    if (string.IsNullOrEmpty(combo_NPCSelect.Text))
-                    {
-                        MessageBox.Show("请选择指定NPC或忍者");
-                        return;
-                    }
-                    //TODO: 2. NPC/忍者 的处理
-                    type = FightType.NPC;
-                }
-                else if (radio_modeSelect3.Checked)
-                {
-                    if (string.IsNullOrEmpty(textBox_customX.Text) || string.IsNullOrEmpty(textBox_customY.Text))
-                    {
-                        MessageBox.Show("还未指定坐标");
-                        return;
-                    }
-                    //TODO: 3. 自定义 的处理
-                    type = FightType.CustomPoint;
-                    GlobalFight.CustomPoint = new Point
-                    {
-                        X = int.Parse(textBox_customX.Text),
-                        Y = int.Parse(textBox_customY.Text)
-                    };
-                }
-
-                //开启刷怪线程，传入参数
-                GlobalFight.Start(type);
-                btn_start.Text = "结束";
+                return ;
             }
-            else
+            changing = true;
+            try
             {
-                //此时GlobalFight.IsFighting为真，需要结束
-                GlobalFight.Stop();
-                btn_start.Text = "开始";
+                FightType type = new FightType();
+                if (!GlobalFight.IsFighting)
+                {
+                    //此时GlobalFight.IsFighting为假，需要开始
+                    if (radio_modeSelect1.Checked)
+                    {
+                        //TODO: 1.刷野怪 的处理
+                        type = FightType.Wild;
+                    }
+                    else if (radio_modeSelect2.Checked)
+                    {
+                        if (string.IsNullOrEmpty(combo_NPCSelect.Text))
+                        {
+                            MessageBox.Show("请选择指定NPC或忍者");
+                            return;
+                        }
+                        //TODO: 2. NPC/忍者 的处理
+                        type = FightType.NPC;
+                    }
+                    else if (radio_modeSelect3.Checked)
+                    {
+                        if (string.IsNullOrEmpty(textBox_customX.Text) || string.IsNullOrEmpty(textBox_customY.Text))
+                        {
+                            MessageBox.Show("还未指定坐标");
+                            return;
+                        }
+                        //TODO: 3. 自定义 的处理
+                        type = FightType.CustomPoint;
+                        GlobalFight.CustomPoint = new Point
+                        {
+                            X = int.Parse(textBox_customX.Text),
+                            Y = int.Parse(textBox_customY.Text)
+                        };
+                    }
+
+                    //开启刷怪线程，传入参数
+                    GlobalFight.Start(type);
+                    btn_start.Text = "结束";
+                }
+                else
+                {
+                    //此时GlobalFight.IsFighting为真，需要结束
+                    GlobalFight.Stop();
+                    btn_start.Text = "开始";
+                }
+            }
+            finally
+            {
+                changing = false;
             }
         }
 
