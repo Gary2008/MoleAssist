@@ -66,6 +66,7 @@
             this.btn_clearCache = new System.Windows.Forms.Button();
             this.btn_refreshGame = new System.Windows.Forms.Button();
             this.checkBox_onTop = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox_fightOptions.SuspendLayout();
             this.tabControl_Main.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -444,12 +445,23 @@
             this.checkBox_onTop.UseVisualStyleBackColor = true;
             this.checkBox_onTop.CheckedChanged += new System.EventHandler(this.checkBox_onTop_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(601, 690);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(76, 28);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1201, 785);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.tabControl_Main);
             this.Controls.Add(this.webBrowser_game);
@@ -507,6 +519,7 @@
         private System.Windows.Forms.TextBox textBox_customY;
         private System.Windows.Forms.TextBox textBox_customX;
         private System.Windows.Forms.TextBox textBox_interval;
+        private System.Windows.Forms.Button button1;
     }
 }
 
