@@ -1,36 +1,81 @@
 ﻿using NLua;
+using NLua.Exceptions;
 using System;
 using System.Drawing;
-using settings = MoleAssist.Properties.Settings;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace Fight
 {
+    public enum FightType { Wild, NPC, CustomPoint };
     public class FightManager : IDisposable
     {
         private Lua state_ = null;
         private string luaScript_ = null;
         
+
         public bool IsFighting { get; set; }
         public Point CustomPoint { get; set; }
         
+
         public FightManager(string lua) {
             IsFighting = false;
-            CustomPoint = settings.Default.customPoint;
+            CustomPoint = Common.settings.customPoint;
             luaScript_ = lua;
-            state_ = new Lua();
-            //TODO: 注册LUA函数
-
+            InitLua();
+            callLua(luaScript_);
         }
 
-        public bool Start() {
+        private void InitLua()
+        {
+            if (state_ != null)
+            {
+                return ;
+
+            }
+            state_ = new Lua();
+            //TODO: 注册LUA函数
+            MethodInfo[] methods = typeof(MoleAssist.Common).GetMethods();
+            foreach (MethodInfo m in methods)
+            {
+                state_.RegisterFunction(m.Name, m);
+            }
+        }
+
+        public object[] callLua(string script)
+        {
+            try
+            {
+                return state_.DoString(script);
+            }
+            catch (LuaScriptException e)
+            {
+                MessageBox.Show("Exception~\n LuaScriptException : " + e.Message);
+                return null;
+            }catch (LuaException e)
+            {
+                MessageBox.Show("Exception~\n LuaException :" + e.Message);
+                throw;
+            }
+        }
+
+        public bool Start(FightType type) {
             if (IsFighting)
             {
                 return false;
             }
             IsFighting = true;
             //TODO: start fight processing
-            throw new NotImplementedException();
+            if (type == FightType.CustomPoint)
+            {
+                callLua(string.Format("SetCustomPoint({0},{1})", CustomPoint.X, CustomPoint.Y));
+            }
+            //传给LUA字符串，可改变FightType枚举值顺序，一旦对外发布不要改变已有名称
+            callLua( string.Format("StartFight(\"{0}\")", FightType.GetName(typeof(FightType), type) ));
+
+            return true;
         }
+
         public bool Stop()
         {
             if (!IsFighting)
@@ -38,9 +83,11 @@ namespace Fight
                 return true;
             }
             IsFighting = true;
-            //TODO: stop fight processing
 
-            throw new NotImplementedException();
+            //TODO: stop fight processing
+            callLua("StopFight()");
+
+            return true;
         }
 
         #region IDisposable Support
@@ -53,8 +100,12 @@ namespace Fight
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)。
-                    state_.Close();
-                    state_.Dispose();
+                    if (state_　!= null)
+                    {
+                        state_.Close();
+                        state_.Dispose();
+                    }
+
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
