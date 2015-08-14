@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Fight
+namespace MoleAssist
 {
     public enum FightType { Wild, NPC, CustomPoint };
     public class FightManager : IDisposable
