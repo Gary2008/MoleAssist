@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Config
 {
-    class ConfigException : ApplicationException
+    [Serializable]
+    public class ConfigException : Exception
     {
         public ConfigException() : base()
         {
@@ -13,20 +15,28 @@ namespace Config
         public ConfigException(string message, Exception inner) : base(message, inner)
         {
         }
+        protected ConfigException(SerializationInfo info, StreamingContext context) : base (info, context)
+        {
+        }
     }
-    class ConfigFetchException : ConfigException
+    [Serializable]
+    public class ConfigFetchException : ConfigException
     {
         public ConfigFetchException()
         {
         }
-        public ConfigFetchException(string message)
+        public ConfigFetchException(string message) : base(message)
         {
         }
         public ConfigFetchException(string message, Exception inner) : base(message, inner)
         {
         }
+        protected ConfigFetchException(SerializationInfo info, StreamingContext context) : base (info, context)
+        {
+        }
     }
-    class ConfigParseException : ConfigException
+    [Serializable]
+    public class ConfigParseException : ConfigException
     {
         public ConfigParseException() : base()
         {
@@ -35,6 +45,9 @@ namespace Config
         {
         }
         public ConfigParseException(string message, Exception inner) : base(message, inner)
+        {
+        }
+        protected ConfigParseException(SerializationInfo info, StreamingContext context) : base (info, context)
         {
         }
     }

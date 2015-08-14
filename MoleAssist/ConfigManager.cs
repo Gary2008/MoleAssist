@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace Config
 {
@@ -15,48 +16,61 @@ namespace Config
     public enum Functions { AutoFight, Notice };
     public struct BlackListItem
     {
-        public string type;
-        public string id;
-        public string reason;
+        public override bool Equals(Object obj)
+        {
+            return obj is BlackListItem && this == (BlackListItem)obj;
+        }
+        public override int GetHashCode()
+        {
+            return type.GetHashCode() ^ id.GetHashCode();
+        }
+        public static bool operator ==(BlackListItem x, BlackListItem y)
+        {
+            return x.type == y.type && x.id == y.id;
+        }
+        public static bool operator !=(BlackListItem x, BlackListItem y)
+        {
+            return !(x == y);
+        }
+        public string type { get; set; }
+        public string id { get; set; }
+        public string reason { get; set; }
     }
     public static class ConfigManager
     {
         private const string DEFAULT_REMOTE = "http://7xl2db.dl1.z0.glb.clouddn.com";
 
-        private static readonly string ProductVersion;
-        private static readonly string AssemblyVersion;
+        private static readonly string ProductVersion = System.Windows.Forms.Application.ProductVersion.ToString();
+        private static readonly string AssemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 
         private static string remote_ = null;  //结尾必需不包含斜杠
         private static bool loaded_ = false;
-        private static readonly XmlDocument xmlDoc_;
+        private static readonly XmlDocument xmlDoc_ = new XmlDocument();
         private static XmlNode xmlRoot_;
-
-        static ConfigManager()
-        {
-            ProductVersion = System.Windows.Forms.Application.ProductVersion.ToString();
-            AssemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            xmlDoc_ = new XmlDocument();
-#if DEBUG && LocalConfig
-            string local = Directory.GetCurrentDirectory() + "/LocalConfig";
-            if (Directory.Exists(local))
-            {
-                Load("file:///" + local);
-            }
-#endif
-        }
 
         public static bool IsLoaded()
         {
             return loaded_;
          }
 
-
-        public static bool Load(string remote = DEFAULT_REMOTE)
+        public static bool Load()
+        {
+            return Load(DEFAULT_REMOTE);
+        }
+        public static bool Load(string remote)
         {
             try
             {
+#if DEBUG && LocalConfig
+                string local = Directory.GetCurrentDirectory() + "/LocalConfig";
+                if (Directory.Exists(local))
+                {
+                    Load("file:///" + local);
+                }
+#else
                 remote_ = remote;
+#endif
                 StreamReader reader = new StreamReader(Request("/config.xml").GetResponseStream());
                 Parse(reader.ReadToEnd());
                 loaded_ = true;
@@ -66,50 +80,57 @@ namespace Config
             {
                 if (e is ConfigFetchException)
                 {
-                    MessageBox.Show("获取配置文件失败" + "\n" + e.Message);
+                    MessageBox.Show("获取配置文件失败\n" + e.Message);
                     Environment.Exit(0);
                 }
                 if (e is ConfigParseException)
                 {
-                    MessageBox.Show("解析配置文件失败" + "\n" + e.Message);
+                    MessageBox.Show("解析配置文件失败\n" + e.Message);
                     Environment.Exit(0);
                 }
                 throw;
             }
         }
 
-        public static XmlNodeList GetAllNodes()
+        public static XmlNodeList AllNodes
         {
-            if (!loaded_)
-            {
-                Load();
-            }
-            return xmlRoot_.ChildNodes;
-        }
-
-        public static string GetLuaScript()
-        {
-            try
+            get
             {
                 if (!loaded_)
                 {
                     Load();
                 }
-                string luaUri = xmlRoot_.SelectSingleNode("lua").InnerText;
-                StreamReader reader = new StreamReader(Request(luaUri).GetResponseStream());
-                char[] buffer = new char[3];
-                reader.ReadBlock(buffer, 0, 3);
-                if ( buffer[0] == 14 && buffer[1] == 146 && buffer[2] == 250 )
-                {
-                    return DESEncrypt.Decrypt( reader.ReadToEnd() );
-                }
-                return new string(buffer) + reader.ReadToEnd() ;
+                return xmlRoot_.ChildNodes;
             }
-            catch (ConfigException e)
+
+        }
+
+        public static string LuaScript
+        {
+            get
             {
-                MessageBox.Show("配置出现异常" + "\n" + e.Message);
-                Environment.Exit(0);
-                throw;
+                try
+                {
+                    if (!loaded_)
+                    {
+                        Load();
+                    }
+                    string luaUri = xmlRoot_.SelectSingleNode("lua").InnerText;
+                    StreamReader reader = new StreamReader(Request(luaUri).GetResponseStream());
+                    char[] buffer = new char[3];
+                    reader.ReadBlock(buffer, 0, 3);
+                    if (buffer[0] == 14 && buffer[1] == 146 && buffer[2] == 250)
+                    {
+                        return DESEncrypt.Decrypt(reader.ReadToEnd());
+                    }
+                    return new string(buffer) + reader.ReadToEnd();
+                }
+                catch (ConfigException e)
+                {
+                    MessageBox.Show("配置出现异常\n" + e.Message);
+                    Environment.Exit(0);
+                    throw;
+                }
             }
         }
 
@@ -187,6 +208,11 @@ namespace Config
             return xmlRoot_.SelectSingleNode(item + "/" + name);
         }
 
+        public static string Get(XmlNode item, string attr)
+        {
+            return Get(item, attr, null);
+        }
+
         /// <summary>
         /// 获取指定配置节点的属性
         /// </summary>
@@ -194,10 +220,10 @@ namespace Config
         /// <param name="attr">属性名称</param>
         /// <param name="def">无此属性时返回值</param>
         /// <returns></returns>
-        public static string Get(XmlNode item, string attr, string def = null)
+        public static string Get(XmlNode item, string attr, string def)
         {
             XmlNode t = item.Attributes.GetNamedItem(attr);
-            if (t == null && def != null)
+            if (t == null)
             {
                 return def;
             }

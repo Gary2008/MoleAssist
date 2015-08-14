@@ -14,7 +14,7 @@ namespace MoleAssist
         private FightManager GlobalFight;
         public Form_Main()
         {
-            lua = ConfigManager.GetLuaScript();
+            lua = ConfigManager.LuaScript;
             GlobalFight = new FightManager(lua);
             InitializeComponent();
         }
@@ -88,7 +88,7 @@ namespace MoleAssist
         {
             if (!GlobalFight.IsFighting)
             {
-                if (textBox_interval.Text == "")
+                if ( string.IsNullOrEmpty(textBox_interval.Text) )
                 {
                     MessageBox.Show("打野周期不能为空");
                     return;
@@ -101,7 +101,7 @@ namespace MoleAssist
                 }
                 else if (radio_modeSelect2.Checked)
                 {
-                    if (combo_NPCSelect.Text == "")
+                    if (string.IsNullOrEmpty(combo_NPCSelect.Text))
                     {
                         MessageBox.Show("请选择指定NPC或忍者");
                         return;
@@ -111,7 +111,7 @@ namespace MoleAssist
                 }
                 else if(radio_modeSelect3.Checked)
                 {
-                    if (textBox_customX.Text == "" || textBox_customY.Text == "")
+                    if (string.IsNullOrEmpty(textBox_customX.Text) || string.IsNullOrEmpty(textBox_customY.Text) )
                     {
                         MessageBox.Show("还未获取坐标");
                         return ;
@@ -154,7 +154,7 @@ namespace MoleAssist
         }
 
 
-        void RunCmd(string cmd)
+        private static void RunCmd(string cmd)
         {
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = "cmd.exe";
