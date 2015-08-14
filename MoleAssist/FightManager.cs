@@ -12,9 +12,8 @@ namespace MoleAssist
     {
         private Lua state_ = null;
         private string luaScript_ = null;
-        
 
-        public bool IsFighting { get; set; }
+        public bool IsFighting { get; private set; }
         public Point CustomPoint { get; set; }
         
 
@@ -82,7 +81,7 @@ namespace MoleAssist
             {
                 return true;
             }
-            IsFighting = true;
+            IsFighting = false;
 
             //TODO: stop fight processing
             callLua("StopFight()");
@@ -103,7 +102,6 @@ namespace MoleAssist
                     if (state_　!= null)
                     {
                         state_.Close();
-                        state_.Dispose();
                     }
 
                 }

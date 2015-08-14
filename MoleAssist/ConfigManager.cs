@@ -43,7 +43,7 @@ namespace Config
         private static readonly string AssemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 
-        private static string remote_ = null;  //结尾必需不包含斜杠
+        private static string remote_ = DEFAULT_REMOTE;  //结尾必需不包含斜杠
         private static bool loaded_ = false;
         private static readonly XmlDocument xmlDoc_ = new XmlDocument();
         private static XmlNode xmlRoot_;
@@ -65,11 +65,11 @@ namespace Config
                 string local = Directory.GetCurrentDirectory() + "/LocalConfig";
                 if (Directory.Exists(local))
                 {
-                    remote_ = "file:///" + local;
+                    remote = "file:///" + local;
                 }
-#else
-                remote_ = remote;
 #endif
+                remote_ = remote;
+
                 StreamReader reader = new StreamReader(Request("/config.xml").GetResponseStream());
                 Parse(reader.ReadToEnd());
                 loaded_ = true;
