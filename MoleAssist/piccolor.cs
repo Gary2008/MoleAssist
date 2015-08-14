@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace MoleAssist
 {
 
-    class Piccolor
+    static class Piccolor
       {
         [DllImport("gdi32.dll")]
         public static extern IntPtr CreateDC(
@@ -23,33 +23,41 @@ namespace MoleAssist
 
         [DllImport("gdi32.dll")]
         public static extern IntPtr CreateCompatibleDC(IntPtr hdc);    // handle to DC
+
         [DllImport("gdi32.dll")]
         public static extern IntPtr CreateCompatibleBitmap(
         IntPtr hdc, // handle to DC
         int nWidth, // width of bitmap, in pixels
         int nHeight // height of bitmap, in pixels
         );
+
         [DllImport("gdi32.dll")]
         public static extern IntPtr SelectObject(
         IntPtr hdc, // handle to DC
         IntPtr hgdiobj // handle to object
         );
+
         [DllImport("gdi32.dll")]
         public static extern int DeleteDC(IntPtr hdc);   // handle to DC
+
         [DllImport("gdi32.dll")]
-        public static extern IntPtr DeleteObject(IntPtr hObject);
+        public static extern int DeleteObject(IntPtr hObject);
+
         [DllImport("user32.dll")]
         public static extern bool PrintWindow(
         IntPtr hwnd, // Window to copy,Handle to the window that will be copied. 
         IntPtr hdcBlt, // HDC to print into,Handle to the device context. 
         UInt32 nFlags // Optional flags,Specifies the drawing options. It can be one of the following values. 
         );
+
         [DllImport("user32.dll")]
         public static extern IntPtr GetWindowDC(IntPtr hwnd);
+
         [DllImport("user32.dll")]
-        public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
+        public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
         #region 获取游戏图像
-        public Bitmap GetWindow(IntPtr hWnd)    //hWnd可以是窗口、控件等的handle。
+        public static Bitmap GetWindow(IntPtr hWnd)    //hWnd可以是窗口、控件等的handle。
         {
             IntPtr hscrdc = GetWindowDC(hWnd);
             Control control = Control.FromHandle(hWnd);
@@ -78,7 +86,7 @@ namespace MoleAssist
         /// <param name="p_PartBitmap">小图形</param>
         /// <param name="p_Float">容差</param>
         /// <returns>坐标</returns>
-        public  Point GetImageContains(Bitmap p_SourceBitmap, Bitmap p_PartBitmap, int p_Float)
+        public static Point GetImageContains(Bitmap p_SourceBitmap, Bitmap p_PartBitmap, int p_Float)
         {
             int _SourceWidth = p_SourceBitmap.Width;
             int _SourceHeight = p_SourceBitmap.Height;

@@ -8,7 +8,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.XPath;
 
 namespace Config
 {
@@ -66,7 +65,7 @@ namespace Config
                 string local = Directory.GetCurrentDirectory() + "/LocalConfig";
                 if (Directory.Exists(local))
                 {
-                    Load("file:///" + local);
+                    remote_ = "file:///" + local;
                 }
 #else
                 remote_ = remote;
