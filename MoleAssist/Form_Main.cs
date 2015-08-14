@@ -148,22 +148,16 @@ namespace MoleAssist
         bool isGetting = false;
         private void btn_getxy_Click(object sender, EventArgs e)
         {
-            if (isGetting)
+            if (isGetting || GlobalFight.IsFighting)
             {
                 return;
             }
             isGetting = true;
-            MessageBox.Show("请在3秒内把鼠标移到要获取的坐标");
-            Thread t = new Thread(o => Thread.Sleep(3000));
-            t.Start(this);
-            while (t.IsAlive)
-            {
-                Application.DoEvents();
-            }
+            MessageBox.Show("把鼠标移到要获取的坐标上，然后按下回车","不要点确定");
             Point point = webBrowser_game.PointToClient(MousePosition);
             textBox_customX.Text = point.X.ToString();
             textBox_customY.Text = point.Y.ToString();
-            MessageBox.Show("获取成功！" + point.ToString() );
+            MessageBox.Show("获取成功！" + point.ToString());
             Properties.Settings.Default.customPoint = point;
             isGetting = false;
         }
