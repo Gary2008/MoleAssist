@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using Common = MoleAssist.Common;
 
 namespace Config
 {
@@ -62,9 +63,10 @@ namespace Config
             try
             {
 #if DEBUG && LocalConfig
-                string local = Directory.GetCurrentDirectory() + "/LocalConfig";
+                string local = Directory.GetCurrentDirectory() + "\\LocalConfig";
                 if (Directory.Exists(local))
                 {
+                    Common.Trace("检测到本地配置：" + local);
                     remote = "file:///" + local;
                 }
 #endif
