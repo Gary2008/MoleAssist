@@ -94,7 +94,7 @@ namespace MoleAssist.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool alert {
             get {
                 return ((bool)(this["alert"]));
@@ -133,10 +133,10 @@ namespace MoleAssist.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
         public global::System.Drawing.Point customPoint {
             get {
-                return ((global::System.Drawing.Point)(this["CustomPoint"]));
+                return ((global::System.Drawing.Point)(this["customPoint"]));
             }
             set {
-                this["CustomPoint"] = value;
+                this["customPoint"] = value;
             }
         }
         
