@@ -40,8 +40,10 @@ namespace MoleAssist
         [DllImport("gdi32.dll")]
         public static extern int DeleteDC(IntPtr hdc);   // handle to DC
 
+
         [DllImport("gdi32.dll")]
-        public static extern int DeleteObject(IntPtr hObject);
+        public static extern IntPtr DeleteObject(IntPtr hObject);
+
 
         [DllImport("user32.dll")]
         public static extern bool PrintWindow(
@@ -54,10 +56,10 @@ namespace MoleAssist
         public static extern IntPtr GetWindowDC(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+        public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
 
         #region 获取游戏图像
-        public static Bitmap GetWindow(IntPtr hWnd)    //hWnd可以是窗口、控件等的handle。
+        public static Bitmap GetWindow(IntPtr hWnd)    //hWnd可以是窗口、控件等的handle，因此这种方法截我们想要的部分非常好用。
         {
             IntPtr hscrdc = GetWindowDC(hWnd);
             Control control = Control.FromHandle(hWnd);
@@ -73,8 +75,6 @@ namespace MoleAssist
             DeleteObject(hbitmap);
             DeleteDC(hmemdc);//删除用过的对象       
             ReleaseDC(hWnd, hscrdc);
-            //Image i = bmp;        //输出图片
-            //i.Save("f:/bbb.bmp");
             return bmp;
         }
         #endregion

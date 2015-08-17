@@ -207,8 +207,7 @@ namespace MoleAssist
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Common.Click(Common.hGame, new Point { X=int.Parse(textBox_customX.Text),Y=int.Parse(textBox_customY.Text) });
-            
+            ifcolor.FindAndCheckGhost(webBrowser_game.Handle);
         }
     }
 }
