@@ -3,6 +3,7 @@ using System.Collections;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Xml;
 
 namespace MoleAssist
 {
@@ -14,6 +15,7 @@ namespace MoleAssist
         /// </summary>
         internal static Properties.Settings settings { get { return MoleAssist.Properties.Settings.Default; } }
         internal static IntPtr hGame;
+        internal static Hashtable ht;
         /// <summary>
         /// 将指定方法的信息转换为字符串返回
         /// </summary>
@@ -124,6 +126,20 @@ namespace MoleAssist
             EnumChildWindows(parentWindow, new ChildWindowProcessCallBack(ChildWindowProcess), out h );
             hGame = h;
             return h.ToInt32() != 0;
+        }
+
+        public static void hashtable()
+        {
+            Hashtable ht = new Hashtable();
+            var doc = new XmlDocument();
+            doc.Load("F:/verify.xml");
+            XmlNodeList nodes = doc.SelectNodes("verify/item");
+            foreach (XmlElement node in nodes)
+            {
+                int key = int.Parse( node.GetAttribute("key"));
+                int value  = int.Parse(node.GetAttribute("value"));
+                ht.Add(key, value);
+            }
         }
 
     }

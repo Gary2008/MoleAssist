@@ -42,6 +42,12 @@
             this.textbox_SkillOrder = new System.Windows.Forms.TextBox();
             this.combo_skillMode = new System.Windows.Forms.ComboBox();
             this.combo_identifyFailed = new System.Windows.Forms.ComboBox();
+            this.checkBox_alert = new System.Windows.Forms.CheckBox();
+            this.checkBox_qucikTraining = new System.Windows.Forms.CheckBox();
+            this.checkBox_isAutoIdentify = new System.Windows.Forms.CheckBox();
+            this.checkBox_useAnger = new System.Windows.Forms.CheckBox();
+            this.checkBox_couldHiddenMode = new System.Windows.Forms.CheckBox();
+            this.checkBox_ReHP = new System.Windows.Forms.CheckBox();
             this.radio_modeSelect1 = new System.Windows.Forms.RadioButton();
             this.radio_modeSelect2 = new System.Windows.Forms.RadioButton();
             this.radio_modeSelect3 = new System.Windows.Forms.RadioButton();
@@ -50,6 +56,7 @@
             this.btn_start = new System.Windows.Forms.Button();
             this.tabControl_Main = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox_interval = new System.Windows.Forms.TextBox();
             this.textBox_customY = new System.Windows.Forms.TextBox();
             this.textBox_customX = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -59,14 +66,18 @@
             this.btn_clearCache = new System.Windows.Forms.Button();
             this.btn_refreshGame = new System.Windows.Forms.Button();
             this.checkBox_onTop = new System.Windows.Forms.CheckBox();
-            this.textBox_interval = new System.Windows.Forms.TextBox();
-            this.checkBox_alert = new System.Windows.Forms.CheckBox();
-            this.checkBox_qucikTraining = new System.Windows.Forms.CheckBox();
-            this.checkBox_isAutoIdentify = new System.Windows.Forms.CheckBox();
-            this.checkBox_useAnger = new System.Windows.Forms.CheckBox();
-            this.checkBox_couldHiddenMode = new System.Windows.Forms.CheckBox();
-            this.checkBox_ReHP = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             label_skillOrder = new System.Windows.Forms.Label();
             label_disclaimer = new System.Windows.Forms.Label();
             label_about = new System.Windows.Forms.Label();
@@ -161,6 +172,89 @@
             this.combo_identifyFailed.Name = "combo_identifyFailed";
             this.combo_identifyFailed.Size = new System.Drawing.Size(72, 20);
             this.combo_identifyFailed.TabIndex = 5;
+            // 
+            // checkBox_alert
+            // 
+            this.checkBox_alert.AutoSize = true;
+            this.checkBox_alert.Checked = global::MoleAssist.Properties.Settings.Default.alert;
+            this.checkBox_alert.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_alert.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "alert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_alert.Enabled = false;
+            this.checkBox_alert.Location = new System.Drawing.Point(156, 58);
+            this.checkBox_alert.Name = "checkBox_alert";
+            this.checkBox_alert.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_alert.TabIndex = 4;
+            this.checkBox_alert.Text = "异常鸣笛";
+            this.checkBox_alert.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_qucikTraining
+            // 
+            this.checkBox_qucikTraining.AutoSize = true;
+            this.checkBox_qucikTraining.Checked = global::MoleAssist.Properties.Settings.Default.qucikTraining;
+            this.checkBox_qucikTraining.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "qucikTraining", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_qucikTraining.Enabled = false;
+            this.checkBox_qucikTraining.Location = new System.Drawing.Point(6, 73);
+            this.checkBox_qucikTraining.Name = "checkBox_qucikTraining";
+            this.checkBox_qucikTraining.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_qucikTraining.TabIndex = 3;
+            this.checkBox_qucikTraining.Text = "精灵带练";
+            this.checkBox_qucikTraining.UseVisualStyleBackColor = true;
+            this.checkBox_qucikTraining.CheckedChanged += new System.EventHandler(this.checkBox_qucikTraining_CheckedChanged);
+            // 
+            // checkBox_isAutoIdentify
+            // 
+            this.checkBox_isAutoIdentify.AutoSize = true;
+            this.checkBox_isAutoIdentify.Checked = global::MoleAssist.Properties.Settings.Default.isAutoIdentify;
+            this.checkBox_isAutoIdentify.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "isAutoIdentify", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_isAutoIdentify.Enabled = false;
+            this.checkBox_isAutoIdentify.Location = new System.Drawing.Point(6, 36);
+            this.checkBox_isAutoIdentify.Name = "checkBox_isAutoIdentify";
+            this.checkBox_isAutoIdentify.Size = new System.Drawing.Size(156, 16);
+            this.checkBox_isAutoIdentify.TabIndex = 2;
+            this.checkBox_isAutoIdentify.Text = "自动过验证，不能识别时";
+            this.checkBox_isAutoIdentify.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_useAnger
+            // 
+            this.checkBox_useAnger.AutoSize = true;
+            this.checkBox_useAnger.Checked = global::MoleAssist.Properties.Settings.Default.useAnger;
+            this.checkBox_useAnger.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_useAnger.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "useAnger", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_useAnger.Enabled = false;
+            this.checkBox_useAnger.Location = new System.Drawing.Point(84, 58);
+            this.checkBox_useAnger.Name = "checkBox_useAnger";
+            this.checkBox_useAnger.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_useAnger.TabIndex = 1;
+            this.checkBox_useAnger.Text = "自动放怒";
+            this.checkBox_useAnger.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_couldHiddenMode
+            // 
+            this.checkBox_couldHiddenMode.AutoSize = true;
+            this.checkBox_couldHiddenMode.Checked = global::MoleAssist.Properties.Settings.Default.couldHiddenMode;
+            this.checkBox_couldHiddenMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_couldHiddenMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "couldHiddenMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_couldHiddenMode.Enabled = false;
+            this.checkBox_couldHiddenMode.Location = new System.Drawing.Point(84, 73);
+            this.checkBox_couldHiddenMode.Name = "checkBox_couldHiddenMode";
+            this.checkBox_couldHiddenMode.Size = new System.Drawing.Size(84, 16);
+            this.checkBox_couldHiddenMode.TabIndex = 9;
+            this.checkBox_couldHiddenMode.Text = "可后台模式";
+            this.checkBox_couldHiddenMode.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_ReHP
+            // 
+            this.checkBox_ReHP.AutoSize = true;
+            this.checkBox_ReHP.Checked = global::MoleAssist.Properties.Settings.Default.ReHP;
+            this.checkBox_ReHP.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_ReHP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "ReHP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox_ReHP.Enabled = false;
+            this.checkBox_ReHP.Location = new System.Drawing.Point(6, 58);
+            this.checkBox_ReHP.Name = "checkBox_ReHP";
+            this.checkBox_ReHP.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_ReHP.TabIndex = 0;
+            this.checkBox_ReHP.Text = "自动回血";
+            this.checkBox_ReHP.UseVisualStyleBackColor = true;
             // 
             // radio_modeSelect1
             // 
@@ -268,6 +362,16 @@
             this.tabPage1.Text = "自动刷怪";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // textBox_interval
+            // 
+            this.textBox_interval.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MoleAssist.Properties.Settings.Default, "FightInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_interval.Location = new System.Drawing.Point(115, 5);
+            this.textBox_interval.Name = "textBox_interval";
+            this.textBox_interval.Size = new System.Drawing.Size(30, 21);
+            this.textBox_interval.TabIndex = 16;
+            this.textBox_interval.Text = global::MoleAssist.Properties.Settings.Default.FightInterval;
+            this.textBox_interval.Visible = false;
+            // 
             // textBox_customY
             // 
             this.textBox_customY.Location = new System.Drawing.Point(137, 71);
@@ -369,108 +473,124 @@
             this.checkBox_onTop.UseVisualStyleBackColor = true;
             this.checkBox_onTop.CheckedChanged += new System.EventHandler(this.checkBox_onTop_CheckedChanged);
             // 
-            // textBox_interval
-            // 
-            this.textBox_interval.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MoleAssist.Properties.Settings.Default, "FightInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_interval.Location = new System.Drawing.Point(115, 5);
-            this.textBox_interval.Name = "textBox_interval";
-            this.textBox_interval.Size = new System.Drawing.Size(30, 21);
-            this.textBox_interval.TabIndex = 16;
-            this.textBox_interval.Text = global::MoleAssist.Properties.Settings.Default.FightInterval;
-            this.textBox_interval.Visible = false;
-            // 
-            // checkBox_alert
-            // 
-            this.checkBox_alert.AutoSize = true;
-            this.checkBox_alert.Checked = global::MoleAssist.Properties.Settings.Default.alert;
-            this.checkBox_alert.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_alert.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "alert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_alert.Enabled = false;
-            this.checkBox_alert.Location = new System.Drawing.Point(156, 58);
-            this.checkBox_alert.Name = "checkBox_alert";
-            this.checkBox_alert.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_alert.TabIndex = 4;
-            this.checkBox_alert.Text = "异常鸣笛";
-            this.checkBox_alert.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_qucikTraining
-            // 
-            this.checkBox_qucikTraining.AutoSize = true;
-            this.checkBox_qucikTraining.Checked = global::MoleAssist.Properties.Settings.Default.qucikTraining;
-            this.checkBox_qucikTraining.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "qucikTraining", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_qucikTraining.Enabled = false;
-            this.checkBox_qucikTraining.Location = new System.Drawing.Point(6, 73);
-            this.checkBox_qucikTraining.Name = "checkBox_qucikTraining";
-            this.checkBox_qucikTraining.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_qucikTraining.TabIndex = 3;
-            this.checkBox_qucikTraining.Text = "精灵带练";
-            this.checkBox_qucikTraining.UseVisualStyleBackColor = true;
-            this.checkBox_qucikTraining.CheckedChanged += new System.EventHandler(this.checkBox_qucikTraining_CheckedChanged);
-            // 
-            // checkBox_isAutoIdentify
-            // 
-            this.checkBox_isAutoIdentify.AutoSize = true;
-            this.checkBox_isAutoIdentify.Checked = global::MoleAssist.Properties.Settings.Default.isAutoIdentify;
-            this.checkBox_isAutoIdentify.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "isAutoIdentify", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_isAutoIdentify.Enabled = false;
-            this.checkBox_isAutoIdentify.Location = new System.Drawing.Point(6, 36);
-            this.checkBox_isAutoIdentify.Name = "checkBox_isAutoIdentify";
-            this.checkBox_isAutoIdentify.Size = new System.Drawing.Size(156, 16);
-            this.checkBox_isAutoIdentify.TabIndex = 2;
-            this.checkBox_isAutoIdentify.Text = "自动过验证，不能识别时";
-            this.checkBox_isAutoIdentify.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_useAnger
-            // 
-            this.checkBox_useAnger.AutoSize = true;
-            this.checkBox_useAnger.Checked = global::MoleAssist.Properties.Settings.Default.useAnger;
-            this.checkBox_useAnger.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_useAnger.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "useAnger", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_useAnger.Enabled = false;
-            this.checkBox_useAnger.Location = new System.Drawing.Point(84, 58);
-            this.checkBox_useAnger.Name = "checkBox_useAnger";
-            this.checkBox_useAnger.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_useAnger.TabIndex = 1;
-            this.checkBox_useAnger.Text = "自动放怒";
-            this.checkBox_useAnger.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_couldHiddenMode
-            // 
-            this.checkBox_couldHiddenMode.AutoSize = true;
-            this.checkBox_couldHiddenMode.Checked = global::MoleAssist.Properties.Settings.Default.couldHiddenMode;
-            this.checkBox_couldHiddenMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_couldHiddenMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "couldHiddenMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_couldHiddenMode.Enabled = false;
-            this.checkBox_couldHiddenMode.Location = new System.Drawing.Point(84, 73);
-            this.checkBox_couldHiddenMode.Name = "checkBox_couldHiddenMode";
-            this.checkBox_couldHiddenMode.Size = new System.Drawing.Size(84, 16);
-            this.checkBox_couldHiddenMode.TabIndex = 9;
-            this.checkBox_couldHiddenMode.Text = "可后台模式";
-            this.checkBox_couldHiddenMode.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_ReHP
-            // 
-            this.checkBox_ReHP.AutoSize = true;
-            this.checkBox_ReHP.Checked = global::MoleAssist.Properties.Settings.Default.ReHP;
-            this.checkBox_ReHP.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_ReHP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "ReHP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_ReHP.Enabled = false;
-            this.checkBox_ReHP.Location = new System.Drawing.Point(6, 58);
-            this.checkBox_ReHP.Name = "checkBox_ReHP";
-            this.checkBox_ReHP.Size = new System.Drawing.Size(72, 16);
-            this.checkBox_ReHP.TabIndex = 0;
-            this.checkBox_ReHP.Text = "自动回血";
-            this.checkBox_ReHP.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(561, 732);
+            this.button1.Location = new System.Drawing.Point(572, 687);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 27);
             this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
+            this.button1.Text = "获得物品";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(639, 687);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(61, 27);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "关闭资料";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(706, 687);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(63, 27);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "战斗结束";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(775, 687);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(97, 27);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "技能或等级提升";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(878, 687);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(62, 27);
+            this.button5.TabIndex = 18;
+            this.button5.Text = "在线时间";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(946, 687);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(66, 27);
+            this.button6.TabIndex = 19;
+            this.button6.Text = "首发死亡";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(1018, 687);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(61, 27);
+            this.button7.TabIndex = 20;
+            this.button7.Text = "寻找野怪";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(1085, 687);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(61, 27);
+            this.button8.TabIndex = 21;
+            this.button8.Text = "战斗加载";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(572, 729);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(109, 27);
+            this.button9.TabIndex = 22;
+            this.button9.Text = "是否可以使用技能";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(687, 729);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(61, 27);
+            this.button10.TabIndex = 23;
+            this.button10.Text = "验证框";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(754, 729);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(61, 27);
+            this.button11.TabIndex = 24;
+            this.button11.Text = "替换精灵";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(843, 738);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "label1";
             // 
             // Form_Main
             // 
@@ -479,6 +599,17 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1201, 785);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.tabControl_Main);
@@ -501,6 +632,7 @@
             this.groupBox_control.ResumeLayout(false);
             this.groupBox_control.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -535,6 +667,17 @@
         private System.Windows.Forms.CheckBox checkBox_isAutoIdentify;
         private System.Windows.Forms.CheckBox checkBox_ReHP;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Label label1;
     }
 }
 

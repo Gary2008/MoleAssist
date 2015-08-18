@@ -1,9 +1,10 @@
 ﻿using Config;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace MoleAssist
 { 
@@ -102,6 +103,7 @@ namespace MoleAssist
                             FightType.CustomPoint)
                             );
                     Common.UpdateFlashHandle(webBrowser_game.Handle);
+                    Common.hashtable();//初始化hash,遍历F;/xxxx.xml内容到common.ht
                     GlobalFight.FightOptions.handle = Common.hGame;
                     GlobalFight.FightOptions.interval = int.Parse(textBox_interval.Text);
                     GlobalFight.FightOptions.type = Enum.GetName(typeof(FightType), type);
@@ -205,9 +207,149 @@ namespace MoleAssist
             Common.settings.Save();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//-------------------------获得物品
         {
-            ifcolor.FindAndCheckGhost(webBrowser_game.Handle);
+            if (ifcolor.getgoods(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text = (ColorTranslator.ToWin32(a.GetPixel(700, 288)).ToString()) +","+ (ColorTranslator.ToWin32(a.GetPixel(594, 411)).ToString());
+                a.Dispose();
+            }
         }
+
+        private void button2_Click(object sender, EventArgs e)//-----------------关闭资料
+        {
+            if (ifcolor.Closedata(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(959, 95)).ToString()) +","+ (ColorTranslator.ToWin32(a.GetPixel(552, 114)).ToString());
+                a.Dispose();
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)//------------------战斗结束
+        {
+            if (ifcolor.fightend(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(542, 196)).ToString()) +","+ (ColorTranslator.ToWin32(a.GetPixel(603, 197)).ToString());
+                a.Dispose();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)//------------------技能或等级提升
+        {
+            if (ifcolor.skilllvup(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(189, 222)).ToString()) +","+ (ColorTranslator.ToWin32(a.GetPixel(587, 461)).ToString());
+                a.Dispose();
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)//------------------在线时间
+        {
+            if (ifcolor.Onlinetime(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(409, 320)).ToString()) +","+ (ColorTranslator.ToWin32(a.GetPixel(474, 283)).ToString());
+                a.Dispose();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)//-----------------首发死亡
+        {
+            if (ifcolor.GhostDie(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(153, 103)).ToString());
+                a.Dispose();
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)//------------------寻找野怪
+        {
+            if (ifcolor.FindAndCheckGhost(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  "找不到";
+                a.Dispose();
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)//--------------------------战斗加载
+        {
+            if (ifcolor.IfcheckGhost(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(121, 3)).ToString());
+                a.Dispose();
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)//========================是否可以使用技能
+        {
+            if (ifcolor.IfFight(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(327, 576)).ToString());
+                a.Dispose();
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)//-----------------验证框
+        {
+            if (ifcolor.IfVerify(webBrowser_game.Handle))
+            {
+                 
+            }
+            else
+            {
+                Bitmap a = Piccolor.GetWindow(Handle);
+                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(347, 219)).ToString()) +","+ (ColorTranslator.ToWin32(a.GetPixel(516, 411)).ToString());
+                a.Dispose();
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)//----------------------替换精灵
+        {
+            ifcolor.ReplaceGhost(webBrowser_game.Handle);
+        }
+
     }
 }

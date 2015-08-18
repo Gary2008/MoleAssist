@@ -84,7 +84,7 @@ namespace MoleAssist
         /// </summary>
         /// <param name="p_SourceBitmap">原始图形</param>
         /// <param name="p_PartBitmap">小图形</param>
-        /// <param name="p_Float">容差</param>
+        /// <param name="p_Float">溶差</param>
         /// <returns>坐标</returns>
         public static Point GetImageContains(Bitmap p_SourceBitmap, Bitmap p_PartBitmap, int p_Float)
         {
