@@ -11,19 +11,17 @@ namespace MoleAssist
 {
     public static partial class Common
     {
-
         /// <summary>
         /// 程序设置
         /// </summary>
         internal static Properties.Settings settings { get { return MoleAssist.Properties.Settings.Default; } }
         internal static IntPtr hGame;
-        internal static Hashtable ht = new Hashtable();
+
         /// <summary>
         /// 将指定方法的信息转换为字符串返回
         /// </summary>
         /// <param name="m">方法信息</param>
         /// <returns>返回字符串形式的方法信息</returns>
-        [LuaFunction]
         public static string StrMethodInfo(MethodBase m)
         {
             string result = "";
@@ -129,20 +127,6 @@ namespace MoleAssist
             hGame = h;
             return h.ToInt32() != 0;
         }
-
-        public static void hashtable()
-        {
-            var doc = new XmlDocument();
-            doc.Load("F:/verify.xml");
-            XmlNodeList nodes = doc.SelectNodes("verify/item");
-            foreach (XmlElement node in nodes)
-            {
-                int key = int.Parse(node.GetAttribute("key"));
-                int value  = int.Parse(node.GetAttribute("value"));
-                ht.Add(key, value);
-            }
-        }
-
         /// <summary>
         /// 上传jpg到空间
         /// </summary>
@@ -156,6 +140,5 @@ namespace MoleAssist
             byte[] responseArray = myWebClient.UploadFile("http://updata.xyh968200.goodrain.net/upload_file.php", "POST", fileName);
             return Encoding.GetEncoding(encodingType).GetString(responseArray);
         }
-
     }
 }

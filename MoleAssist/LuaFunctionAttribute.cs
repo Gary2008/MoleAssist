@@ -10,7 +10,8 @@ namespace MoleAssist
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     sealed class LuaFunction : Attribute
     {
-        public string FunctionName{ get; private set; }
+        public string FuncName { get; private set; }
+        public string Prefix { get; private set; }
         public LuaFunction() : this(null)
         {
         }
@@ -19,9 +20,11 @@ namespace MoleAssist
         /// Lua函数属性
         /// </summary>
         /// <param name="FuncName">lua中的函数名</param>
-        public LuaFunction(string FuncName)
+        /// <param name="prefix">lua中的函数名前缀</param>
+        public LuaFunction(string FuncName = null, string Prefix = "")
         {
-            FunctionName = FuncName;
+            this.FuncName = FuncName;
+            this.Prefix = Prefix;
         }
     }
 }

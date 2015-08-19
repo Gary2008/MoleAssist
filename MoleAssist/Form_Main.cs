@@ -7,15 +7,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace MoleAssist
-{ 
+{
     public partial class Form_Main : Form
     {
-        private static string lua;
-        private FightManager GlobalFight;
+        private static FightManager GlobalFight = new FightManager(ConfigManager.LuaScript);
         public Form_Main()
         {
-            lua = ConfigManager.LuaScript;
-            GlobalFight = new FightManager(lua);
             InitializeComponent();
         }
 
@@ -95,7 +92,7 @@ namespace MoleAssist
             try
             {
                 if (!GlobalFight.IsFighting)
-                {
+                    {
                     //此时GlobalFight.IsFighting为假，需要开始
                     //设定参数
                     var type = (radio_modeSelect1.Checked ? FightType.Wild :
@@ -103,7 +100,6 @@ namespace MoleAssist
                             FightType.CustomPoint)
                             );
                     Common.UpdateFlashHandle(webBrowser_game.Handle);
-                    Common.hashtable();//初始化hash,遍历F;/xxxx.xml内容到common.ht
                     GlobalFight.FightOptions.handle = Common.hGame;
                     GlobalFight.FightOptions.interval = int.Parse(textBox_interval.Text);
                     GlobalFight.FightOptions.type = Enum.GetName(typeof(FightType), type);
@@ -124,7 +120,6 @@ namespace MoleAssist
                                 throw new InputInvailedException("没有选择NPC或忍者！");
                             }
                             GlobalFight.FightOptions.NPC = combo_NPCSelect.SelectedIndex;
-                            //GlobalFight.FightOptions.
                             break;
                         case FightType.CustomPoint:
                             if (string.IsNullOrEmpty(textBox_customX.Text) || string.IsNullOrEmpty(textBox_customY.Text))
@@ -209,7 +204,7 @@ namespace MoleAssist
 
         private void button1_Click(object sender, EventArgs e)//-------------------------获得物品
         {
-            if (ifcolor.getgoods(webBrowser_game.Handle))
+            if (ifcolor.GetGoods(webBrowser_game.Handle))
             {
                  
             }
@@ -223,7 +218,7 @@ namespace MoleAssist
 
         private void button2_Click(object sender, EventArgs e)//-----------------关闭资料
         {
-            if (ifcolor.Closedata(webBrowser_game.Handle))
+            if (ifcolor.Profile(webBrowser_game.Handle))
             {
                  
             }
@@ -236,7 +231,7 @@ namespace MoleAssist
         }
         private void button3_Click(object sender, EventArgs e)//------------------战斗结束
         {
-            if (ifcolor.fightend(webBrowser_game.Handle))
+            if (ifcolor.FightEnd(webBrowser_game.Handle))
             {
                  
             }
@@ -250,7 +245,7 @@ namespace MoleAssist
 
         private void button4_Click(object sender, EventArgs e)//------------------技能或等级提升
         {
-            if (ifcolor.skilllvup(webBrowser_game.Handle))
+            if (ifcolor.SkillLvUp(webBrowser_game.Handle))
             {
                  
             }
@@ -264,7 +259,7 @@ namespace MoleAssist
 
         private void button5_Click(object sender, EventArgs e)//------------------在线时间
         {
-            if (ifcolor.Onlinetime(webBrowser_game.Handle))
+            if (ifcolor.OnlineTime(webBrowser_game.Handle))
             {
                  
             }
@@ -278,7 +273,7 @@ namespace MoleAssist
 
         private void button6_Click(object sender, EventArgs e)//-----------------首发死亡
         {
-            if (ifcolor.GhostDie(webBrowser_game.Handle))
+            if (ifcolor.PetDie(webBrowser_game.Handle))
             {
                  
             }
@@ -292,7 +287,7 @@ namespace MoleAssist
 
         private void button7_Click(object sender, EventArgs e)//------------------寻找野怪
         {
-            if (ifcolor.FindAndCheckGhost(webBrowser_game.Handle))
+            if (ifcolor.FindAndClickMonster(webBrowser_game.Handle))
             {
                  
             }

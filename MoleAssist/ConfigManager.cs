@@ -1,5 +1,6 @@
 ﻿#define LocalConfig
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -48,6 +49,12 @@ namespace Config
         private static bool loaded_ = false;
         private static readonly XmlDocument xmlDoc_ = new XmlDocument();
         private static XmlNode xmlRoot_;
+        public static Hashtable hashTable = new Hashtable();
+
+        static ConfigManager()
+        {
+            Load();
+        }
 
         public static bool IsLoaded()
         {
@@ -72,8 +79,17 @@ namespace Config
 #endif
                 remote_ = remote;
 
-                StreamReader reader = new StreamReader(Request("/config.xml").GetResponseStream());
-                Parse(reader.ReadToEnd());
+                StreamReader reader;
+                {
+                    reader = new StreamReader(Request("/config.xml").GetResponseStream());
+                    Parse(reader.ReadToEnd());
+                    reader.Dispose();
+                }
+                {
+                    reader = new StreamReader(Request("/verify.xml").GetResponseStream());
+                    ParseVerify(reader.ReadToEnd());
+                    //reader.Dispose();
+                }
                 loaded_ = true;
                 return true;
             }
@@ -81,14 +97,19 @@ namespace Config
             {
                 if (e is ConfigFetchException)
                 {
-                    MessageBox.Show("获取配置文件失败\n" + e.Message);
+                    MessageBox.Show("获取配置文件失败\n" + e.Message + "\n" + e.StackTrace);
                     Environment.Exit(0);
                 }
                 if (e is ConfigParseException)
                 {
-                    MessageBox.Show("解析配置文件失败\n" + e.Message);
+                    MessageBox.Show("解析配置文件失败\n" + e.Message + "\n" + e.StackTrace);
                     Environment.Exit(0);
                 }
+                throw;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("初始化配置失败 \n" + e.Message  + "\n" + e.StackTrace);
                 throw;
             }
         }
@@ -240,11 +261,30 @@ namespace Config
             }
             catch (XmlException e)
             {
-                throw new ConfigParseException(string.Format("配置文件 {0} 解析失败", xml), e);
+                throw new ConfigParseException(string.Format("配置文件解析失败 {0} ", xml), e);
             }
 
         }
+        private static void ParseVerify(string xml)
+        {
+            try
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml(xml);
+                XmlNodeList nodes = doc.SelectNodes("verify/item");
+                foreach (XmlElement node in nodes)
+                {
+                    int key = int.Parse(node.GetAttribute("key"));
+                    int value = int.Parse(node.GetAttribute("value"));
+                    hashTable.Add(key, value);
+                }
+            }
+            catch (XmlException e)
+            {
+                throw new ConfigParseException(string.Format("配置文件解析失败 {0} ", xml), e);
+            }
 
+        }
         private static WebResponse Request(string requestFile)
         {
             try

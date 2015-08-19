@@ -1,8 +1,10 @@
 ﻿using NLua;
 using NLua.Exceptions;
 using System;
+using System.Collections.Concurrent;
 using System.Drawing;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MoleAssist
@@ -41,87 +43,187 @@ namespace MoleAssist
     public class FightManager : IDisposable
     {
         private Lua state_ = null;
-        private string luaScript_ = null;
 
         public bool IsFighting { get; protected set; }
         public FightOption FightOptions;
 
-        public FightManager(string lua) {
+
+        private enum LuaMsgType { Do, Start, Destory  };
+        private struct LuaMsg{
+            public override bool Equals(Object obj)
+            {
+                return obj is LuaMsg && this == (LuaMsg)obj;
+            }
+            public override int GetHashCode()
+            {
+                return type.GetHashCode() ^ param.GetHashCode();
+            }
+            public static bool operator ==(LuaMsg x, LuaMsg y)
+            {
+                return x.type == y.type && x.param == y.param;
+            }
+            public static bool operator !=(LuaMsg x, LuaMsg y)
+            {
+                return !(x == y);
+            }
+            public LuaMsg(LuaMsgType type, object[] param = null)
+            {
+                this.type = type;
+                this.param = param;
+            }
+            public LuaMsgType type { get; set; }
+            public object[] param { get; set; }
+    }
+        /// 代表Lua解释器是否初始化完成
+        private bool ltloaded_ = false;
+        /// Lua解释器线程
+        private Thread lthread;
+        /// Lua解释器线程锁对象
+        private object ltlock = new object();
+        /// Lua解释器 通信队列（线程安全）
+        private ConcurrentQueue<LuaMsg> ltqueue = new ConcurrentQueue<LuaMsg>();
+   
+        public FightManager(string luaScript) {
             IsFighting = false;
-            luaScript_ = lua;
             InitLua();
-            callLua(luaScript_);
+            //加载一次lua
+            callLua(luaScript);
         }
 
+
         /// <summary>
-        /// 初始化Lua解释器
+        /// LT 开头 = LuaThread专用，不要在主线程直接调用
         /// </summary>
-        private void InitLua()
+        private void LTInit(Lua state)
         {
-            if (state_ != null)
+            lock (ltlock)
             {
-                //已初始化
-                return ;
-            }
-            state_ = new Lua();
-            //LUA初始化
-            state_.LoadCLRPackage();
-            callLua(@"import ('System')
+                //LUA初始化
+                state.LoadCLRPackage();
+                callLua(@"import ('System')
 import ('System.Windows.Forms')
 import ('System.Drawing')");
-            //TODO: 注册LUA函数
-            RegisterMethodsAsFunction( typeof(Common) );
-            RegisterMethodsAsFunction( typeof(Piccolor) );
-            RegisterMethodsAsFunction( typeof(ifcolor ));
-        }
-
-        /// <summary>
-        /// 将类方法作为lua函数注册
-        /// </summary>
-        /// <param name="classInfo">类信息，使用typeof(className)获取</param>
-        /// <returns></returns>
-        public bool RegisterMethodsAsFunction(Type classInfo)
-        {
-            if (state_ == null)
-            {
-                return false;
+                //TODO: 注册LUA函数
+                LTRegisterMethodsAsFunction(state, typeof(Common));
+                LTRegisterMethodsAsFunction(state, typeof(Piccolor));
+                LTRegisterMethodsAsFunction(state, typeof(ifcolor));
             }
-            MethodInfo[] methods = classInfo.GetMethods();
-            foreach (MethodInfo m in methods)
+            ltloaded_ = true;
+        }
+        private void LTWorking()
+        {
+            try
             {
-                if (m.IsDefined(typeof(LuaFunction), true))
+                state_ = new Lua();
+                LTInit(state_);
+                while (true)
                 {
-                    var attr = Common.GetCustomAttribute<LuaFunction>(m);
-                    string luaFuncName = attr.FunctionName != null ? attr.FunctionName : m.Name; //如未指定lua函数名，默认使用c#方法名注册
-                    Common.Trace("注册Lua函数"+ luaFuncName + "（From " + classInfo.Name + "）：" +  Common.StrMethodInfo(m));
-                    state_.RegisterFunction(luaFuncName, m);
+                    LuaMsg msg;
+                    if (ltqueue.TryDequeue(out msg))
+                    {
+                        lock (ltlock)
+                        {
+                            switch (msg.type)
+                            {
+                                case LuaMsgType.Do:
+                                    state_.DoString((string)msg.param[0]);
+                                    break;
+                                case LuaMsgType.Start:
+                                    while (IsFighting)
+                                    {
+                                        state_.DoString("Fight()");
+                                    }
+                                    break;
+                                case LuaMsgType.Destory:
+                                    state_.Close();
+                                    state_.Dispose();
+                                    return;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Thread.Yield();
+                    }
+                }
+            }
+            catch (LuaScriptException e)
+            {
+                MessageBox.Show("LuaScriptException : " + e.Message, "脚本异常");
+                throw;
+            }
+            catch (LuaException e)
+            {
+                MessageBox.Show("LuaException :" + e.Message, "Lua异常");
+                throw;
+            }
+        }
+        /// <summary>
+        /// 初始化Lua解释器线程
+        /// </summary>
+        private bool InitLua()
+        {
+            if (ltloaded_)
+            {
+                //已初始化直接返回
+                return true;
+            }
+            ltloaded_ = false;
+            lthread = new Thread(LTWorking);
+            lthread.Start();
+            // 等待lua线程执行完初始化操作再返回
+            while (ltloaded_)
+            {
+                if (lthread.IsAlive)
+                {
+                    return false;
                 }
             }
             return true;
         }
 
         /// <summary>
-        /// 调用Lua执行指定脚本
+        /// 将类方法作为lua函数注册
+        /// 注意：该方法必须由创建lua state的线程调用
+        /// </summary>
+        /// <param name="classInfo">类信息，使用typeof(className)获取</param>
+        /// <returns></returns>
+        public bool LTRegisterMethodsAsFunction(Lua state, Type classInfo, bool direct = false)
+        {
+            if (state == null)
+            {
+                return false;
+            }
+            MethodInfo[] methods = classInfo.GetMethods();
+            foreach (MethodInfo m in methods)
+            {
+                if (direct || m.IsDefined(typeof(LuaFunction), true))
+                {
+                    var attr = Common.GetCustomAttribute<LuaFunction>(m);
+                    string luaFuncName = string.IsNullOrEmpty(attr.FuncName) ? m.Name : attr.FuncName; //如未指定lua函数名，默认使用c#方法名注册
+                    string prefix = string.IsNullOrEmpty(attr.Prefix) ? string.Empty : attr.Prefix+ "_"; //如未指定前缀，默认无前缀
+                    Common.Trace("注册Lua函数"+ prefix + luaFuncName + "（From " + classInfo.Name + "）：" +  Common.StrMethodInfo(m));
+                    state.RegisterFunction(luaFuncName, m);
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 将指定脚本加入lua执行队列
         /// </summary>
         /// <param name="script">要执行的脚本</param>
         /// <returns>执行结果，需自行转换对象类型</returns>
-        public object[] callLua(string script)
+        public void callLua(string script)
         {
-            try
-            {
-                return state_.DoString(script);
-            }
-            catch (LuaScriptException e)
-            {
-                MessageBox.Show("LuaScriptException : " + e.Message, "脚本异常");
-                return null;
-            }catch (LuaException e)
-            {
-                MessageBox.Show("LuaException :" + e.Message, "Lua异常");
-                throw;
-            }
+            NotifyLua(LuaMsgType.Do, new object[] { script });
         }
-
+        private void NotifyLua(LuaMsgType t, object[] o)
+        {
+            ltqueue.Enqueue(new LuaMsg(t, o ));
+        }
         /// <summary>
         /// 通知Lua开始战斗
         /// </summary>
@@ -134,11 +236,13 @@ import ('System.Drawing')");
             }
             IsFighting = true;
             //TODO: 传入对象
-            state_["Settings"] = Common.settings;
-            state_["FightOptions"] = this.FightOptions;
+            lock (ltlock)
+            {
+                state_["Settings"] = Common.settings;
+                state_["FightOptions"] = this.FightOptions;
+            }
             //TODO: start fight processing
-            callLua("StartFight()");
-
+            NotifyLua(LuaMsgType.Start, null);
             return true;
         }
 
@@ -155,7 +259,6 @@ import ('System.Drawing')");
             IsFighting = false;
 
             //TODO: stop fight processing
-            callLua("StopFight()");
 
             return true;
         }
@@ -170,16 +273,27 @@ import ('System.Drawing')");
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)。
-                    if (state_　!= null)
+                    if (lthread !=null && lthread.IsAlive)
                     {
-                        state_.Close();
+                        NotifyLua(LuaMsgType.Destory, null);
+                        if (lthread.Join(3* 1000))
+                        {
+                            try
+                            {
+                                lthread.Abort();
+                            }
+                            catch (ThreadAbortException)
+                            {
+                            }
+                        }
+                        
                     }
 
                 }
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
                 // TODO: 将大型字段设置为 null。
                 disposedValue = true;
-
+                IsFighting = false;
             }
         }
 

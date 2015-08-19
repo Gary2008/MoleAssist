@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Xml;
+using Config;
 
 namespace MoleAssist
 {
@@ -13,7 +14,8 @@ namespace MoleAssist
         /// 获得物品确定
         /// </summary>
         /// <param name="hwnd"></param>
-        public static bool getgoods(IntPtr hwnd)
+        [LuaFunction(Prefix: "FightCall")]
+        public static bool GetGoods(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
             if(ColorTranslator.ToWin32(a.GetPixel(700,288)) == 1450723 && ColorTranslator.ToWin32(a.GetPixel(594, 411))== 16777215)
@@ -29,7 +31,8 @@ namespace MoleAssist
         /// 关闭训练师窗口
         /// </summary>
         /// <param name="hwnd"></param>
-        public static bool Closedata(IntPtr hwnd)
+        [LuaFunction(Prefix: "FightCall")]
+        public static bool Profile(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
             if (ColorTranslator.ToWin32(a.GetPixel(959, 95)) == 9665024 && ColorTranslator.ToWin32(a.GetPixel(552, 114)) == 6014655)
@@ -45,7 +48,8 @@ namespace MoleAssist
         /// 战斗结束点击确定
         /// </summary>
         /// <param name="hwnd"></param>
-        public static bool fightend(IntPtr hwnd)
+        [LuaFunction(Prefix: "FightCall")]
+        public static bool FightEnd(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
             if (ColorTranslator.ToWin32(a.GetPixel(542, 196)) == 2866687 && ColorTranslator.ToWin32(a.GetPixel(603, 197)) == 3392255)
@@ -61,7 +65,8 @@ namespace MoleAssist
         /// 学会新技能或精灵进化确定
         /// </summary>
         /// <param name="hwnd"></param>
-        public static bool skilllvup(IntPtr hwnd)
+        [LuaFunction(Prefix: "FightCall")]
+        public static bool SkillLvUp(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
             if (ColorTranslator.ToWin32(a.GetPixel(189, 222)) == 6908428 && ColorTranslator.ToWin32(a.GetPixel(587, 461)) == 16377170)
@@ -77,7 +82,8 @@ namespace MoleAssist
         /// 关闭在线时间提示
         /// </summary>
         /// <param name="hwnd"></param>
-        public static bool Onlinetime(IntPtr hwnd)
+        [LuaFunction(Prefix: "FightCall")]
+        public static bool OnlineTime(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
             if (ColorTranslator.ToWin32(a.GetPixel(409, 320)) == 14144823 && ColorTranslator.ToWin32(a.GetPixel(474, 283)) == 4819199)
@@ -93,7 +99,8 @@ namespace MoleAssist
         /// 判断首发精灵是否死亡
         /// </summary>
         /// <param name="hwnd"></param>
-        public static bool GhostDie(IntPtr hwnd)
+        [LuaFunction(Prefix: "FightCall")]
+        public static bool PetDie(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
             if (ColorTranslator.ToWin32(a.GetPixel(153, 103)) == 3418386)
@@ -110,7 +117,8 @@ namespace MoleAssist
         /// </summary>
         /// <param name="hwnd"></param>
         /// <returns></returns>
-        public static bool FindAndCheckGhost(IntPtr hwnd)
+        [LuaFunction(Prefix: "FightCall")]
+        public static bool FindAndClickMonster(IntPtr hwnd)
         {
                 Bitmap a = Piccolor.GetWindow(hwnd);
                 Point xy = Piccolor.GetImageContains(a, global::MoleAssist.Properties.Resources.lv, 0);
@@ -137,6 +145,7 @@ namespace MoleAssist
         /// </summary>
         /// <param name="hwnd"></param>
         /// <returns></returns>
+        [LuaFunction(Prefix: "FightCall" , FuncName: "isFightLoading" )]
         public static bool IfcheckGhost(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);         
@@ -153,6 +162,7 @@ namespace MoleAssist
         /// </summary>
         /// <param name="hwnd"></param>
         /// <returns></returns>
+        [LuaFunction(Prefix: "FightCall", FuncName: "couldUseSkill")]
         public static bool IfFight(IntPtr hwnd)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
@@ -169,6 +179,7 @@ namespace MoleAssist
         /// </summary>
         /// <param name="hwnd"></param>
         /// <returns></returns>
+        [LuaFunction(Prefix: "FightCall", FuncName: "hasVerify")]
         public static int IfVerify(IntPtr hwnd)
         {
 
@@ -183,10 +194,10 @@ namespace MoleAssist
                          ColorTranslator.ToWin32(a.GetPixel(654, 326)) +
                          ColorTranslator.ToWin32(a.GetPixel(793, 305)) +
                          ColorTranslator.ToWin32(a.GetPixel(793, 326));
-                if (Common.ht.ContainsKey(key))
+                if (ConfigManager.hashTable.ContainsKey(key))
                 {
                     a.Dispose();
-                    switch (Common.ht[key].ToString())
+                    switch (ConfigManager.hashTable[key].ToString())
                     {
                         case "1":
                             Common.Click(418, 305);
@@ -221,6 +232,7 @@ namespace MoleAssist
         /// </summary>
         /// <param name="hwnd"></param>
         /// <param name="i">这里传技能号，没必杀技的自动使用1号技能</param>
+        [LuaFunction(Prefix: "FightCall", FuncName: "UseSkill")]
         public static void skill(IntPtr hwnd, int i)
         {
             Bitmap a = Piccolor.GetWindow(hwnd);
@@ -276,6 +288,7 @@ namespace MoleAssist
         /// <summary>
         /// 点击补血按钮
         /// </summary>
+        [LuaFunction(Prefix: "FightCall", FuncName: "FullHP")]
         public static void buxue()
         {
             Common.Click(260, 102);
@@ -284,6 +297,7 @@ namespace MoleAssist
         /// 替换精灵
         /// </summary>
         /// <param name="hwnd"></param>
+        [LuaFunction(Prefix: "FightCall", FuncName: "ReplacePet")]
         public static void ReplaceGhost(IntPtr hwnd)
         {
             Common.Click(1134,619);
