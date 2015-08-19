@@ -204,7 +204,7 @@ namespace MoleAssist
 
         private void button1_Click(object sender, EventArgs e)//-------------------------获得物品
         {
-            if (ifcolor.GetGoods(webBrowser_game.Handle))
+            if (ifcolor.GetGoods())
             {
                  
             }
@@ -218,7 +218,7 @@ namespace MoleAssist
 
         private void button2_Click(object sender, EventArgs e)//-----------------关闭资料
         {
-            if (ifcolor.Profile(webBrowser_game.Handle))
+            if (ifcolor.Profile())
             {
                  
             }
@@ -231,7 +231,7 @@ namespace MoleAssist
         }
         private void button3_Click(object sender, EventArgs e)//------------------战斗结束
         {
-            if (ifcolor.FightEnd(webBrowser_game.Handle))
+            if (ifcolor.FightEnd())
             {
                  
             }
@@ -245,7 +245,7 @@ namespace MoleAssist
 
         private void button4_Click(object sender, EventArgs e)//------------------技能或等级提升
         {
-            if (ifcolor.SkillLvUp(webBrowser_game.Handle))
+            if (ifcolor.SkillLvUp())
             {
                  
             }
@@ -259,7 +259,7 @@ namespace MoleAssist
 
         private void button5_Click(object sender, EventArgs e)//------------------在线时间
         {
-            if (ifcolor.OnlineTime(webBrowser_game.Handle))
+            if (ifcolor.OnlineTime())
             {
                  
             }
@@ -273,7 +273,7 @@ namespace MoleAssist
 
         private void button6_Click(object sender, EventArgs e)//-----------------首发死亡
         {
-            if (ifcolor.PetDie(webBrowser_game.Handle))
+            if (ifcolor.PetDie())
             {
                  
             }
@@ -287,7 +287,7 @@ namespace MoleAssist
 
         private void button7_Click(object sender, EventArgs e)//------------------寻找野怪
         {
-            if (ifcolor.FindAndClickMonster(webBrowser_game.Handle))
+            if (ifcolor.FindAndClickMonster())
             {
                  
             }
@@ -301,7 +301,7 @@ namespace MoleAssist
 
         private void button8_Click(object sender, EventArgs e)//--------------------------战斗加载
         {
-            if (ifcolor.IfcheckGhost(webBrowser_game.Handle))
+            if (ifcolor.IfcheckGhost())
             {
                  
             }
@@ -315,7 +315,7 @@ namespace MoleAssist
 
         private void button9_Click(object sender, EventArgs e)//========================是否可以使用技能
         {
-            if (ifcolor.IfFight(webBrowser_game.Handle))
+            if (ifcolor.IfFight())
             {
                  
             }
@@ -329,7 +329,7 @@ namespace MoleAssist
 
         private void button10_Click(object sender, EventArgs e)//-----------------验证框
         {
-           if( ifcolor.IfVerify(webBrowser_game.Handle) == 5)
+           if( ifcolor.IfVerify() == 5)
             {
                 MessageBox.Show("没有匹配到");
             }
@@ -337,8 +337,18 @@ namespace MoleAssist
 
         private void button11_Click(object sender, EventArgs e)//----------------------替换精灵
         {
-            ifcolor.ReplaceGhost(webBrowser_game.Handle);
+            ifcolor.ReplaceGhost();
         }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            GlobalFight.callLua(ConfigManager.LuaScript);
+        }
+
+        private void webBrowser_game_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            ifcolor.fuck(webBrowser_game.Handle);
+            Common.UpdateFlashHandle(webBrowser_game.Handle);
+        }
     }
 }

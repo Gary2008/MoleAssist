@@ -78,6 +78,7 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
             label_skillOrder = new System.Windows.Forms.Label();
             label_disclaimer = new System.Windows.Forms.Label();
             label_about = new System.Windows.Forms.Label();
@@ -248,7 +249,6 @@
             this.checkBox_ReHP.Checked = global::MoleAssist.Properties.Settings.Default.ReHP;
             this.checkBox_ReHP.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_ReHP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "ReHP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox_ReHP.Enabled = false;
             this.checkBox_ReHP.Location = new System.Drawing.Point(6, 58);
             this.checkBox_ReHP.Name = "checkBox_ReHP";
             this.checkBox_ReHP.Size = new System.Drawing.Size(72, 16);
@@ -428,6 +428,7 @@
             this.webBrowser_game.TabIndex = 12;
             this.webBrowser_game.Url = new System.Uri("http://seer2.61.com/play.shtml", System.UriKind.Absolute);
             this.webBrowser_game.WebBrowserShortcutsEnabled = false;
+            this.webBrowser_game.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_game_DocumentCompleted);
             // 
             // groupBox_control
             // 
@@ -593,6 +594,16 @@
             this.label1.TabIndex = 25;
             this.label1.Text = "label1";
             // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(946, 729);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(104, 40);
+            this.button12.TabIndex = 26;
+            this.button12.Text = "重新加载Lua";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -600,6 +611,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1201, 785);
+            this.Controls.Add(this.button12);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
@@ -679,6 +691,7 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button12;
     }
 }
 

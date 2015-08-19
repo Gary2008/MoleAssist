@@ -73,6 +73,33 @@ namespace MoleAssist
         {
             System.Windows.Forms.MessageBox.Show(str, caption);
         }
+        public static void Repaint(IntPtr hWnd, Point p)
+        {
+            const uint WM_LBUTTONDOWN = 0x0201;
+            const uint WM_LBUTTONUP = 0x202;
+            IntPtr MK_LBUTTON = new IntPtr(0x0001);
+            PostMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, mklong(p.X, p.Y));
+            PostMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, mklong(p.X, p.Y));
+        }
+        public struct RECT
+        {
+            long left;
+            long top;
+            long right;
+            long bottom;
+        }
+        [LuaFunction]
+        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        public static extern int InvalidateRect(
+            IntPtr hWnd,
+            object lpRect,
+            bool bErase
+            );
+        [LuaFunction]
+        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        public static extern int UpdateWindow(
+            IntPtr hWnd
+            );
         [LuaFunction]
         [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true ) ]
         private static extern int PostMessage(
@@ -116,7 +143,7 @@ namespace MoleAssist
                 return false;
             }
             Marshal.FreeHGlobal(pBuffer);
-            lParam = new IntPtr(0);
+            lParam = IntPtr.Zero;
             return true;
         }
         public static bool UpdateFlashHandle(IntPtr parentWindow)
@@ -125,7 +152,7 @@ namespace MoleAssist
 
             EnumChildWindows(parentWindow, new ChildWindowProcessCallBack(ChildWindowProcess), out h );
             hGame = h;
-            return h.ToInt32() != 0;
+            return h != IntPtr.Zero;
         }
         /// <summary>
         /// 上传jpg到空间

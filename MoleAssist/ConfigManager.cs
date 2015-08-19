@@ -261,7 +261,7 @@ namespace Config
             }
             catch (XmlException e)
             {
-                throw new ConfigParseException(string.Format("配置文件解析失败 {0} ", xml), e);
+                throw new ConfigParseException(string.Format("配置文件解析失败 {0} {1} {2} ", xml, e.Message, e.StackTrace), e);
             }
 
         }
@@ -276,12 +276,15 @@ namespace Config
                 {
                     int key = int.Parse(node.GetAttribute("key"));
                     int value = int.Parse(node.GetAttribute("value"));
-                    hashTable.Add(key, value);
+                    if (!hashTable.ContainsKey(key))
+                    {
+                        hashTable.Add(key, value);
+                    }
                 }
             }
             catch (XmlException e)
             {
-                throw new ConfigParseException(string.Format("配置文件解析失败 {0} ", xml), e);
+                throw new ConfigParseException(string.Format("配置文件解析失败 {0} {1} {2}", xml,e.Message, e.StackTrace), e);
             }
 
         }

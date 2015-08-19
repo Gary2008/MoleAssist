@@ -141,6 +141,7 @@ import ('System.Drawing')");
                                 default:
                                     break;
                             }
+                            Thread.Sleep(FightOptions.interval);
                         }
                     }
                     else
@@ -151,13 +152,11 @@ import ('System.Drawing')");
             }
             catch (LuaScriptException e)
             {
-                MessageBox.Show("LuaScriptException : " + e.Message, "脚本异常");
-                throw;
+                MessageBox.Show("LuaScriptException : " + e.Message + e.StackTrace, "脚本异常");
             }
             catch (LuaException e)
             {
-                MessageBox.Show("LuaException :" + e.Message, "Lua异常");
-                throw;
+                MessageBox.Show("LuaException :" + e.Message + e.StackTrace, "Lua异常");
             }
         }
         /// <summary>
@@ -202,9 +201,9 @@ import ('System.Drawing')");
                 if (direct || m.IsDefined(typeof(LuaFunction), true))
                 {
                     var attr = Common.GetCustomAttribute<LuaFunction>(m);
-                    string luaFuncName = string.IsNullOrEmpty(attr.FuncName) ? m.Name : attr.FuncName; //如未指定lua函数名，默认使用c#方法名注册
-                    string prefix = string.IsNullOrEmpty(attr.Prefix) ? string.Empty : attr.Prefix+ "_"; //如未指定前缀，默认无前缀
-                    Common.Trace("注册Lua函数"+ prefix + luaFuncName + "（From " + classInfo.Name + "）：" +  Common.StrMethodInfo(m));
+                    string prefix = string.IsNullOrEmpty(attr.Prefix) ? string.Empty : attr.Prefix; //如未指定前缀，默认无前缀
+                    string luaFuncName = prefix + (string.IsNullOrEmpty(attr.FuncName) ? m.Name : attr.FuncName); //如未指定lua函数名，默认使用c#方法名注册
+                    Common.Trace("注册Lua函数"+ luaFuncName + "（From " + classInfo.Name + "）：" +  Common.StrMethodInfo(m));
                     state.RegisterFunction(luaFuncName, m);
                 }
             }
@@ -240,6 +239,7 @@ import ('System.Drawing')");
             {
                 state_["Settings"] = Common.settings;
                 state_["FightOptions"] = this.FightOptions;
+                callLua("Set()");
             }
             //TODO: start fight processing
             NotifyLua(LuaMsgType.Start, null);
