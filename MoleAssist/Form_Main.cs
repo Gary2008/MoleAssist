@@ -334,15 +334,9 @@ namespace MoleAssist
 
         private void button10_Click(object sender, EventArgs e)//-----------------验证框
         {
-            if (ifcolor.IfVerify(webBrowser_game.Handle))
+           if( ifcolor.IfVerify(webBrowser_game.Handle) == 5)
             {
-                 
-            }
-            else
-            {
-                Bitmap a = Piccolor.GetWindow(Handle);
-                label1.Text =  (ColorTranslator.ToWin32(a.GetPixel(347, 219)).ToString()) +","+ (ColorTranslator.ToWin32(a.GetPixel(516, 411)).ToString());
-                a.Dispose();
+                MessageBox.Show("没有匹配到");
             }
         }
 

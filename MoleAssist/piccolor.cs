@@ -205,9 +205,7 @@ namespace MoleAssist
             int _R = p_CurrentlyColor.R;
             int _G = p_CurrentlyColor.G;
             int _B = p_CurrentlyColor.B;
-
             return (_R <= p_CompareColor.R + p_Float && _R >= p_CompareColor.R - p_Float) && (_G <= p_CompareColor.G + p_Float && _G >= p_CompareColor.G - p_Float) && (_B <= p_CompareColor.B + p_Float && _B >= p_CompareColor.B - p_Float);
-
         }
         #endregion
     }

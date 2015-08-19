@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Drawing;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Xml;
 
 namespace MoleAssist
@@ -15,7 +17,7 @@ namespace MoleAssist
         /// </summary>
         internal static Properties.Settings settings { get { return MoleAssist.Properties.Settings.Default; } }
         internal static IntPtr hGame;
-        internal static Hashtable ht;
+        internal static Hashtable ht = new Hashtable();
         /// <summary>
         /// 将指定方法的信息转换为字符串返回
         /// </summary>
@@ -130,16 +132,29 @@ namespace MoleAssist
 
         public static void hashtable()
         {
-            Hashtable ht = new Hashtable();
             var doc = new XmlDocument();
             doc.Load("F:/verify.xml");
             XmlNodeList nodes = doc.SelectNodes("verify/item");
             foreach (XmlElement node in nodes)
             {
-                int key = int.Parse( node.GetAttribute("key"));
+                int key = int.Parse(node.GetAttribute("key"));
                 int value  = int.Parse(node.GetAttribute("value"));
                 ht.Add(key, value);
             }
+        }
+
+        /// <summary>
+        /// 上传jpg到空间
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="uri"></param>
+        /// <param name="encodingType"></param>
+        /// <returns></returns>
+        public static string SendFile(string fileName, string encodingType = "UTF-8")
+        {
+            WebClient myWebClient = new WebClient();
+            byte[] responseArray = myWebClient.UploadFile("http://updata.xyh968200.goodrain.net/upload_file.php", "POST", fileName);
+            return Encoding.GetEncoding(encodingType).GetString(responseArray);
         }
 
     }

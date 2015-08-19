@@ -165,32 +165,51 @@ namespace MoleAssist
             return false;
         }
         /// <summary>
-        /// 判断是否出现验证框，返回-1代表没有出现验证框，返回1，2，3，4，代表需要点击那个位置，返回5代表验证库中找不到匹配数据
+        /// 判断是否出现验证框，返回-1代表没有出现验证框，返回1代表匹配到并点击，返回5代表匹配不到并已经上传到空间
         /// </summary>
         /// <param name="hwnd"></param>
         /// <returns></returns>
         public static int IfVerify(IntPtr hwnd)
         {
+
             Bitmap a = Piccolor.GetWindow(hwnd);
             if (ColorTranslator.ToWin32(a.GetPixel(347, 219)) == 16776960 && ColorTranslator.ToWin32(a.GetPixel(516, 411)) == 3407871)
             {
-                int key = int.Parse((ColorTranslator.ToWin32(a.GetPixel(418, 305))).ToString()+
-                                    (ColorTranslator.ToWin32(a.GetPixel(418, 326))).ToString() +
-                                    (ColorTranslator.ToWin32(a.GetPixel(418, 305))).ToString() +
-                                    (ColorTranslator.ToWin32(a.GetPixel(418, 326))).ToString() +
-                                    (ColorTranslator.ToWin32(a.GetPixel(418, 305))).ToString() +
-                                    (ColorTranslator.ToWin32(a.GetPixel(418, 326))).ToString() +
-                                    (ColorTranslator.ToWin32(a.GetPixel(418, 305))).ToString() +
-                                    (ColorTranslator.ToWin32(a.GetPixel(418, 326))).ToString());
+                int key =ColorTranslator.ToWin32(a.GetPixel(418, 305)) +
+                         ColorTranslator.ToWin32(a.GetPixel(418, 326)) +
+                         ColorTranslator.ToWin32(a.GetPixel(529, 305)) +
+                         ColorTranslator.ToWin32(a.GetPixel(529, 326)) +
+                         ColorTranslator.ToWin32(a.GetPixel(654, 305)) +
+                         ColorTranslator.ToWin32(a.GetPixel(654, 326)) +
+                         ColorTranslator.ToWin32(a.GetPixel(793, 305)) +
+                         ColorTranslator.ToWin32(a.GetPixel(793, 326));
                 if (Common.ht.ContainsKey(key))
                 {
                     a.Dispose();
-                    return int.Parse((string)Common.ht[key]);
+                    switch (Common.ht[key].ToString())
+                    {
+                        case "1":
+                            Common.Click(418, 305);
+                            break;
+                        case "2":
+                            Common.Click(529, 305);
+                            break;
+                        case "3":
+                            Common.Click(654, 305);
+                            break;
+                        case "4":
+                            Common.Click(793, 305);
+                            break;
+                    }
+
+                    return 1;
                 }
                 else
                 {
+                    a.Save("c:/"+key+".jpg");
+                    Common.SendFile("c:/" + key + ".jpg");
                     a.Dispose();
-                    return 5;
+                    return 2;
                 }
                 
             }
