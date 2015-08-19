@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>鼹鼠辅助公告区</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Cache-Control" content="public;max-age=1800;must-revalidate" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="copyright" content="Mole Assistant" />
+		<link rel="shortcut icon" href="favicon.ico" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit"/>
+		<!--meta http-equiv="refresh" content="1800" /-->
+		<style>
+			html{overflow-x:hidden;overflow-y:hidden;}body {overflow-x:hidden;overflow-y:hidden;}
+		</style>
+		<noscript><iframe src="*.html"></iframe>
+		</noscript>
+		<script type="text/javascript" src="http://libs.baidu.com/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript">
+			document.oncontextmenu=function(){return false;};
+			document.ondragstart=function(){return false;};
+			document.onbeforecopy=function(){return false;};
+			document.onselect=function (){return document.selection.empty();};
+			document.oncopy=function (){return document.selection.empty();};
+			document.onmouseup=function (){return document.selection.empty();};
+		</script>
+		<script type="text/javascript">
+
+			var interval = 3500;
+			var stepsize = 78;
+			var scrollspeed = "fast";
+			var objInterval = null;
+			$(document).ready(function() {
+				$("#bottom").html($("#top").html());
+				StartScroll();
+			});
+			function StartScroll() {
+				objInterval = setInterval("verticalloop()", interval);
+			}
+			function StopScroll() {
+				window.clearInterval(objInterval);
+			}
+			function verticalloop() {
+				if ($("#content").scrollTop() >= $("#top").outerHeight()) {
+					$("#content").scrollTop($("#content").scrollTop() - $("#top").outerHeight());
+				}
+				$("#content").animate({
+					"scrollTop": $("#content").scrollTop() + stepsize + "px"
+				},
+				scrollspeed,
+				function() {});
+			}
+			function showContents(){
+				var contents = [
+				'辅助最新版本号：&nbsp;公众版V3.3.1&nbsp;&nbsp;测试版 V3.4α',
+				'本辅助承诺永久免费使用',
+				'<b><a href="javascript:alert(\'cha">cha</a></b>',
+				'拒绝任何侮辱',
+				'辅助唯一官方QQ群：<a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=2313bbcfb0c9a8327eeb90dbb6e154d31c1fc8867eba926d96c764e34926a29e">87375428</a>',
+				'乄Mole灬唯一百度贴吧：<a target="_blank" href="http://tieba.baidu.com/f?kw=%E7%BA%A6%E7%91%9F%E4%BC%A0%E8%AF%B4%E9%BC%B9%E9%BC%A0%E5%AE%B6%E6%97%8F">鼹鼠家族百度贴吧</a>',
+				'自由赛尔论坛：<a target="_blank" href="http://www.freeseer2.com/">http://www.freeseer2.com/</a>',
+				'鼹鼠辅助官网：<a target="_blank" href="javascript:alert(\'暂未开放\');">http://assist.freeseer2.com/</a>',
+				'For Taomee make life getting better.Done.',
+				'当我们失去的时候，才知道自己曾经拥有。',
+				'记住该记住的，忘记该忘记的。',
+				'改变能改变的，接受不能改变的。',
+				'忘掉今天的人将被明天忘掉。',
+				'Never say die.',
+				'得不到你所爱的，就爱你所得的。',
+				'一切伟大的行动和思想，都有一个微不足道的开始。',
+				'Learn not and know not.',
+				'Do one thing at a time, and do well.',
+				'抱最大的希望，为最大的努力，做最坏的打算。',
+				'每一件事都要用多方面的角度来看它。',
+				'Let bygones be bygones.',
+				'Learn to walk before you run.'
+				]; 
+				contents.sort(function(){ return 0.5 - Math.random() });
+				for(key in contents) 
+				{ 
+					$("#content-ul").append("<li></li><li><center>"+contents[key]+"</center></li><li></li>");
+				}
+			}
+			function yiyan(data){
+					$("#content-ul").append("<li></li><li><center>"+data['hitokoto']+"</center></li><li></li>");
+					setTimeout(function(){var hjs=document.createElement('script');hjs.setAttribute('src','http://api.hitokoto.us/rand?encode=jsc&fun=yiyan');document.body.appendChild(hjs);},5000);
+			}
+		</script>
+		<style type="text/css">
+			.infolist{width:400px;matgin:0;}
+			.infolist ul{margin:0;padding:0;}
+			.infolist ul li{list-style:none;height:26px;line-height:26px;}
+			.infocontent{width:420px;height:78px;overflow:hidden;border:1px solid #666666;}
+			body{border:0px}
+		</style>
+	</head>
+	<!-- <script type="text/javascript">window.open("http://tieba.baidu.com/p/2673284121","name1","height=800,width=1100,toolbar=no,scrollbars=yes,menubar=no,screenX=40,screenY=40");</script> -->
+	<body bgcolor="#EDEDED">
+		<div id="content" class="infocontent">
+			<div id="top" class="infolist">
+			<ul id="content-ul"></ul>
+			</div>
+			<div id="bottom" class="infolist">
+			</div>
+		</div>
+		<div id="foot">
+		</div>
+	</body>
+	<script>showContents();</script>
+	<script type="text/javascript">
+		function e(e) {
+			var t = null,
+			n = document.cookie + ";",
+			r = e + "=",
+			i = n.indexOf(r),
+			s;
+			return i != -1 && (i += r.length, s = n.indexOf(";", i), t = n.substring(i, s)),t;
+		}
+		if (e("showed") == null)
+		{
+			var msgs = [
+			'Timee逗比事迹录：'+'\n'+
+			'2011.11.11	赛尔号2VIP乐园建成 开始收费'+'\n'+
+			'2013.1.18	赛尔号2被约瑟率众群殴致死 淘米真乃良心企业'+'\n'+
+			'2013.11.8	封包第7字节以后全部加密'+'\n'+
+			'2013.11.22	封包第15字节校验数据双重加密'+'\n'+
+			'2014.1.10	更新取消约瑟公告，伪邮箱系统上线'+'\n'+
+			'2014.1.28	约瑟开放挑战，逗比的规则，引发新潮流'+'\n'+
+			'2014.2.21	锑米公然售卖观星精元蛋，真是喜闻乐见'+'\n'+
+			'\n狗饼哥，您妈贵姓？'
+			];
+			for(key in msgs) 
+			{ 
+				alert(msgs[key]);
+			}
+			document.cookie = "showed='1';path=/;";
+		}
+	</script>
+	<script type="text/javascript">setTimeout(function(){var hjs=document.createElement('script');hjs.setAttribute('src','http://api.hitokoto.us/rand?encode=jsc&fun=yiyan&charset=utf-8&length=20');document.body.appendChild(hjs);},5000);</script>
+</html>

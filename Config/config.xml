@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<function>
+		<AutoFight open="true"/>
+		<Notice open="true"/>
+	</function>
+	<lua>/fight.lua</lua>
+	<list>
+		<balck>
+			<!-- type： 验证类型，mimi米米号 machine机器码 -->
+			<!-- date： 封禁日期，默认为0 无限期 201690522 -->
+			<item type="mimi" id="371021136" reason="由于您太过屌炸天，系统禁止您登陆" />
+			<item type="mimi" id="90573360" reason="由于您太过屌炸天，系统禁止您登陆" />
+			<item type="mimi" id="72521598" reason="由于您在淘米论坛表现太过屌炸天，系统禁止您登陆" />
+			<item type="mimi" id="82774534" reason="逗比" />
+			<!-- <item type="machine" id="gsdkgsgdsgfsbvbewr" reason="由于您太过屌炸天，系统禁止您登陆"" /> -->
+		</balck>
+		<corp>
+			<item regional="电信" id="19896" name="乄Mole灬家族" captainId="52363998" captainName="乄Mole灬迷戀"><![CDATA[ 战队介绍1~ ]]></item>
+			<item regional="电信" id="40687" name="乄Mole灬兔纸" captainId="40687" captainName="Frk丿兔纸"><![CDATA[ 战队介绍2~ ]]></item>
+			<item regional="网通" id="137180" name="乄Mole灬潜龙" captainId="137180" captainName="乄Mole灬瞬杀"><![CDATA[ 战队介绍3~ ]]></item>
+			<item regional="电信" id="153027" name="乄Mole灬麒麟" captainId="220047" captainName="乄Mole灬永恒"><![CDATA[ 战队介绍4~ ]]></item>
+		</corp>
+	</list>
+</config>
