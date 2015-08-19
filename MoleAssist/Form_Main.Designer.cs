@@ -271,6 +271,7 @@
             // radio_modeSelect2
             // 
             this.radio_modeSelect2.AutoSize = true;
+            this.radio_modeSelect2.Enabled = false;
             this.radio_modeSelect2.Location = new System.Drawing.Point(6, 28);
             this.radio_modeSelect2.Name = "radio_modeSelect2";
             this.radio_modeSelect2.Size = new System.Drawing.Size(83, 16);

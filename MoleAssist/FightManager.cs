@@ -72,7 +72,7 @@ import ('System.Drawing')");
             //TODO: 注册LUA函数
             RegisterMethodsAsFunction( typeof(Common) );
             RegisterMethodsAsFunction( typeof(Piccolor) );
-
+            RegisterMethodsAsFunction( typeof(ifcolor ));
         }
 
         /// <summary>
