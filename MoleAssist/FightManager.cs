@@ -103,10 +103,7 @@ import ('System.Drawing')");
                 LTRegisterMethodsAsFunction(state, typeof(Common));
                 LTRegisterMethodsAsFunction(state, typeof(Piccolor));
                 LTRegisterMethodsAsFunction(state, typeof(ifcolor));
-                state["Settings"] = Common.settings;
-                state["FightOptions"] = this.FightOptions;
-                callLua("Set()");
-            ltloaded_ = true;
+                ltloaded_ = true;
         }
         private void LTWorking()
         {
@@ -122,12 +119,17 @@ import ('System.Drawing')");
                         switch (msg.type)
                         {
                             case LuaMsgType.Do:
+                                Common.Trace("Do " + (string)msg.param[0]);
                                 state_.DoString((string)msg.param[0]);
                                 break;
                             case LuaMsgType.Start:
+                                state_["Settings"] = Common.settings;
+                                state_["FightOptions"] = this.FightOptions;
+                                callLua("Set()");
                                 while (IsFighting)
                                 {
                                     state_.DoString("Fight()");
+                                    Thread.Sleep(FightOptions.interval);
                                 }
                                 break;
                             case LuaMsgType.Destory:
@@ -138,7 +140,6 @@ import ('System.Drawing')");
                             default:
                                 break;
                         }
-                        Thread.Sleep(FightOptions.interval);
                     }
                     else
                     {
