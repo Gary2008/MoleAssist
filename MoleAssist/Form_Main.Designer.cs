@@ -142,10 +142,13 @@
             // 
             // textbox_SkillOrder
             // 
+            this.textbox_SkillOrder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MoleAssist.Properties.Settings.Default, "SkillOrder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textbox_SkillOrder.Location = new System.Drawing.Point(157, 11);
             this.textbox_SkillOrder.Name = "textbox_SkillOrder";
             this.textbox_SkillOrder.Size = new System.Drawing.Size(71, 21);
             this.textbox_SkillOrder.TabIndex = 8;
+            this.textbox_SkillOrder.Text = global::MoleAssist.Properties.Settings.Default.SkillOrder;
+            this.textbox_SkillOrder.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_SkillOrder_KeyPress);
             // 
             // combo_skillMode
             // 
@@ -207,6 +210,7 @@
             // 
             this.checkBox_isAutoIdentify.AutoSize = true;
             this.checkBox_isAutoIdentify.Checked = global::MoleAssist.Properties.Settings.Default.isAutoIdentify;
+            this.checkBox_isAutoIdentify.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_isAutoIdentify.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "isAutoIdentify", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_isAutoIdentify.Enabled = false;
             this.checkBox_isAutoIdentify.Location = new System.Drawing.Point(6, 36);

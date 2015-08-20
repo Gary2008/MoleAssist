@@ -149,10 +149,12 @@ namespace MoleAssist
             catch (InputInvailedException exception)
             {
                 MessageBox.Show(exception.Message, "请检查参数设定");
+                return;
             }
             catch (System.FormatException)
             {
                 MessageBox.Show("格式解析错误", "请检查参数设定");
+                return;
             }
             finally
             {
@@ -355,6 +357,18 @@ namespace MoleAssist
         {
             string path = System.IO.Path.GetTempPath() + "\\";
             System.Diagnostics.Process.Start("explorer.exe", path);
+        }
+
+        private void textbox_SkillOrder_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( Char.IsControl(e.KeyChar) || Char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

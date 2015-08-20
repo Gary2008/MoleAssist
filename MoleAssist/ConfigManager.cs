@@ -1,5 +1,4 @@
-﻿#define LocalConfig
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -69,7 +68,7 @@ namespace Config
         {
             try
             {
-#if DEBUG && LocalConfig
+#if DEBUG
                 string local = Directory.GetCurrentDirectory() + "\\LocalConfig";
                 if (Directory.Exists(local))
                 {
