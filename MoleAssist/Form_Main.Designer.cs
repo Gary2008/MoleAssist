@@ -386,6 +386,7 @@
             this.textBox_customY.ReadOnly = true;
             this.textBox_customY.Size = new System.Drawing.Size(29, 21);
             this.textBox_customY.TabIndex = 15;
+            this.textBox_customY.Visible = false;
             this.textBox_customY.WordWrap = false;
             // 
             // textBox_customX
@@ -396,6 +397,7 @@
             this.textBox_customX.ReadOnly = true;
             this.textBox_customX.Size = new System.Drawing.Size(29, 21);
             this.textBox_customX.TabIndex = 14;
+            this.textBox_customX.Visible = false;
             this.textBox_customX.WordWrap = false;
             // 
             // tabPage2
