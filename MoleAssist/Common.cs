@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -166,6 +167,32 @@ namespace MoleAssist
             WebClient myWebClient = new WebClient();
             byte[] responseArray = myWebClient.UploadFile("http://updata.xyh968200.goodrain.net/upload_file.php", "POST", fileName);
             return Encoding.GetEncoding(encodingType).GetString(responseArray);
+        }
+
+        /// <summary>
+        /// 截取一张图片的指定部分
+        /// </summary>
+        /// <param name="bitmapPathAndName">原始图片路径</param>
+        /// <param name="width">截取图片的宽度</param>
+        /// <param name="height">截取图片的高度</param>
+        /// <param name="offsetX">开始截取的X坐标</param>
+        /// <param name="offsetY">开始截取的Y坐标</param>
+        /// <returns></returns>
+        public static Bitmap cut(Bitmap i)
+        {
+            int width = 522;
+            int height = 235;
+            int offsetX = 335;
+            int offsetY = 210;
+            Bitmap sourceBitmap = new Bitmap(i);
+            Bitmap resultBitmap = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(resultBitmap))
+            {
+                Rectangle resultRectangle = new Rectangle(0, 0, width, height);
+                Rectangle sourceRectangle = new Rectangle(0 + offsetX, 0 + offsetY, width, height);
+                g.DrawImage(sourceBitmap, resultRectangle, sourceRectangle, GraphicsUnit.Pixel);
+            }
+            return resultBitmap;
         }
     }
 }

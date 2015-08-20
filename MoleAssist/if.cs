@@ -11,10 +11,14 @@ namespace MoleAssist
     static class ifcolor
     {
         static IntPtr hwnd;
-
+        static Bitmap a;
         public static void fuck(IntPtr hwnd)
         {
             ifcolor.hwnd = hwnd;
+        }
+        public static void rebitmap()
+        {
+            ifcolor.a = Piccolor.GetWindow(hwnd);
         }
         /// <summary>
         /// 获得物品确定
@@ -23,14 +27,15 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool GetGoods()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if(ColorTranslator.ToWin32(a.GetPixel(700,288)) == 1450723 && ColorTranslator.ToWin32(a.GetPixel(594, 411))== 16777215)
+            rebitmap();
+            if(ColorTranslator.ToWin32(ifcolor.a.GetPixel(700,288)) == 1450723 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(594, 411))== 16777215)
             {
+                ifcolor.a.Dispose();
                 Common.Click(598, 414);
                 //Todo：点击598,414
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
@@ -40,14 +45,15 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool Profile()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(959, 95)) == 9665024 && ColorTranslator.ToWin32(a.GetPixel(552, 114)) == 6014655)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(213, 311)) == 16777011 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(983, 304)) == 16777011)
             {
+                ifcolor.a.Dispose();
                 Common.Click(959,96);
                 //Todo：点击959,96关闭按钮
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
@@ -57,14 +63,15 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool FightEnd()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(542, 196)) == 2866687 && ColorTranslator.ToWin32(a.GetPixel(603, 197)) == 3392255)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(542, 196)) == 2866687 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(603, 197)) == 3392255)
             {
+                ifcolor.a.Dispose();
                 Common.Click(543, 469);
                 //Todo：点击543,469确定按钮
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
@@ -74,14 +81,15 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool SkillLvUp()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(189, 222)) == 6908428 && ColorTranslator.ToWin32(a.GetPixel(587, 461)) == 16377170)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(189, 222)) == 6908428 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(587, 461)) == 16377170)
             {
+                ifcolor.a.Dispose();
                 Common.Click(587, 469);
                 //Todo：点击587,469确定按钮
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
@@ -91,14 +99,15 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool OnlineTime()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(409, 320)) == 14144823 && ColorTranslator.ToWin32(a.GetPixel(474, 283)) == 4819199)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(409, 320)) == 14144823 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(474, 283)) == 4819199)
             {
+                ifcolor.a.Dispose();
                 Common.Click(809, 377);
                 //Todo：点击809,377确定按钮
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
@@ -108,14 +117,15 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool PetDie()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(153, 103)) == 3418386)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(153, 103)) == 3418386)
             {
+                ifcolor.a.Dispose();
                 Common.Click(260, 102);
                 //Todo：点击260,102补血按钮
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
@@ -126,15 +136,15 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool FindAndClickMonster()
         {
-                Bitmap a = Piccolor.GetWindow(hwnd);
+                rebitmap();
                 Point xy = Piccolor.GetImageContains(a, global::MoleAssist.Properties.Resources.lv, 0);
                 if (xy.X == -1)
                 {
-                    a.Dispose();
+                    ifcolor.a.Dispose();
                     return false;
                 }
                 Common.Click(xy.X, xy.Y);
-                a.Dispose();
+                ifcolor.a.Dispose();
                 return true;
         }
         /// <summary>
@@ -154,13 +164,13 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_" , FuncName: "isFightLoading" )]
         public static bool IfcheckGhost()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);         
-            if (ColorTranslator.ToWin32(a.GetPixel(121, 3)) == 2890240)
+            rebitmap();         
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(121, 3)) == 2890240)
             {
-                a.Dispose();
+                ifcolor.a.Dispose();
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
@@ -171,37 +181,37 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_", FuncName: "couldUseSkill")]
         public static bool IfFight()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(327, 576)) == 14861418)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(327, 576)) == 14861418)
             {
-                a.Dispose();
+                ifcolor.a.Dispose();
                 return true;
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return false;
         }
         /// <summary>
-        /// 判断是否出现验证框，返回-1代表没有出现验证框，返回1代表匹配到并点击，返回5代表匹配不到并已经上传到空间
+        /// 判断是否出现验证框，返回-1代表没有出现验证框，返回1代表匹配到并点击，返回2代表匹配不到并已经上传到空间
         /// </summary>
         /// <param name="hwnd"></param>
         /// <returns></returns>
         [LuaFunction(Prefix: "FightCall_", FuncName: "hasVerify")]
         public static int IfVerify()
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(347, 219)) == 16776960 && ColorTranslator.ToWin32(a.GetPixel(516, 411)) == 3407871)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 219)) == 16776960 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(516, 411)) == 3407871)
             {
-                int key =ColorTranslator.ToWin32(a.GetPixel(418, 305)) +
-                         ColorTranslator.ToWin32(a.GetPixel(418, 326)) +
-                         ColorTranslator.ToWin32(a.GetPixel(529, 305)) +
-                         ColorTranslator.ToWin32(a.GetPixel(529, 326)) +
-                         ColorTranslator.ToWin32(a.GetPixel(654, 305)) +
-                         ColorTranslator.ToWin32(a.GetPixel(654, 326)) +
-                         ColorTranslator.ToWin32(a.GetPixel(793, 305)) +
-                         ColorTranslator.ToWin32(a.GetPixel(793, 326));
+                int key =ColorTranslator.ToWin32(ifcolor.a.GetPixel(418, 305)) +
+                         ColorTranslator.ToWin32(ifcolor.a.GetPixel(418, 326)) +
+                         ColorTranslator.ToWin32(ifcolor.a.GetPixel(529, 305)) +
+                         ColorTranslator.ToWin32(ifcolor.a.GetPixel(529, 326)) +
+                         ColorTranslator.ToWin32(ifcolor.a.GetPixel(654, 305)) +
+                         ColorTranslator.ToWin32(ifcolor.a.GetPixel(654, 326)) +
+                         ColorTranslator.ToWin32(ifcolor.a.GetPixel(793, 305)) +
+                         ColorTranslator.ToWin32(ifcolor.a.GetPixel(793, 326));
                 if (ConfigManager.hashTable.ContainsKey(key))
                 {
-                    a.Dispose();
+                    ifcolor.a.Dispose();
                     switch ((int) ConfigManager.hashTable[key])
                     {
                         case 1:
@@ -223,14 +233,16 @@ namespace MoleAssist
                 else
                 {
                     string path = System.IO.Path.GetTempPath() + "\\" + key + ".jpg";
-                    a.Save(path);
+                    Bitmap b = Common.cut(ifcolor.a);
+                    b.Save(path);
                     Common.SendFile(path);
-                    a.Dispose();
+                    ifcolor.a.Dispose();
+                    b.Dispose();
                     return 2;
                 }
                 
             }
-            a.Dispose();
+            ifcolor.a.Dispose();
             return -1;
         }
         /// <summary>
@@ -241,9 +253,10 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_", FuncName: "UseSkill")]
         public static void skill(int i)
         {
-            Bitmap a = Piccolor.GetWindow(hwnd);
-            if (ColorTranslator.ToWin32(a.GetPixel(841, 585)) == 47821)
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(841, 585)) == 47821)
             {
+                ifcolor.a.Dispose();
                 if (i == 1)
                 {
                     Common.Click(356, 622);
@@ -267,6 +280,7 @@ namespace MoleAssist
             }
             else
             {
+                ifcolor.a.Dispose();
                 if (i == 1)
                 {
                     Common.Click(353, 622);
@@ -308,19 +322,12 @@ namespace MoleAssist
         {
             Common.Click(1134,619);
             //Todo:点击换场         1134,619
-            Common.Click(463, 605);
+            rebitmap();
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(428, 645)) == 16315888)
+            {
+                Common.Click(463, 605);
+            }
             //Todo:点击第二位精灵   463,605
         }
-
-
-        //public static void Bless()//-------------大地祝福确定
-        //{
-        //    Bitmap a = Piccolor.GetWindow(hwnd);
-        //    if (a.GetPixel(662, 381) == "F9E552")
-        //    {
-        //        //Todo：点击663, 382确定按钮
-        //    }
-        //    a.Dispose();
-        //}
     }
 }

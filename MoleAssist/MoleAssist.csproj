@@ -87,7 +87,8 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>MoleAssist.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestTimestampUrl>http://timestamp.wosign.com/timestamp</ManifestTimestampUrl>
@@ -134,6 +135,7 @@
     <Compile Include="piccolor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="MoleAssist.pfx" />
     <None Include="Resources\new.bmp" />
     <None Include="Resources\lv.bmp" />
     <EmbeddedResource Include="Form_Main.resx">
@@ -163,7 +165,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="MoleAssist.pfx" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>

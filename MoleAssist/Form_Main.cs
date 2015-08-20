@@ -350,5 +350,11 @@ namespace MoleAssist
             ifcolor.fuck(webBrowser_game.Handle);
             Common.UpdateFlashHandle(webBrowser_game.Handle);
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            string path = System.IO.Path.GetTempPath() + "\\";
+            System.Diagnostics.Process.Start("explorer.exe", path);
+        }
     }
 }
