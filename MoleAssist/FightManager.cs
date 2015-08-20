@@ -195,9 +195,9 @@ import ('System.Drawing')");
             MethodInfo[] methods = classInfo.GetMethods();
             foreach (MethodInfo m in methods)
             {
-                if (direct || m.IsDefined(typeof(LuaFunction), true))
+                if (direct || m.IsDefined(typeof(LuaFunctionAttribute), true))
                 {
-                    var attr = Common.GetCustomAttribute<LuaFunction>(m);
+                    var attr = Common.GetCustomAttribute<LuaFunctionAttribute>(m);
                     string prefix = string.IsNullOrEmpty(attr.Prefix) ? string.Empty : attr.Prefix; //如未指定前缀，默认无前缀
                     string luaFuncName = prefix + (string.IsNullOrEmpty(attr.FuncName) ? m.Name : attr.FuncName); //如未指定lua函数名，默认使用c#方法名注册
                     Common.Trace("注册Lua函数"+ luaFuncName + "（From " + classInfo.Name + "）：" +  Common.StrMethodInfo(m));
