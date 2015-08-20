@@ -78,8 +78,6 @@ namespace MoleAssist
         private bool ltloaded_ = false;
         /// Lua解释器线程
         private Thread lthread;
-        /// Lua解释器线程锁对象
-        private object ltlock = new object();
         /// Lua解释器 通信队列（线程安全）
         private ConcurrentQueue<LuaMsg> ltqueue = new ConcurrentQueue<LuaMsg>();
    
@@ -94,10 +92,8 @@ namespace MoleAssist
         /// <summary>
         /// LT 开头 = LuaThread专用，不要在主线程直接调用
         /// </summary>
-        private void LTInit(Lua state)
+        private void LTInit(ref Lua state)
         {
-            lock (ltlock)
-            {
                 //LUA初始化
                 state.LoadCLRPackage();
                 callLua(@"import ('System')
@@ -107,7 +103,9 @@ import ('System.Drawing')");
                 LTRegisterMethodsAsFunction(state, typeof(Common));
                 LTRegisterMethodsAsFunction(state, typeof(Piccolor));
                 LTRegisterMethodsAsFunction(state, typeof(ifcolor));
-            }
+                state["Settings"] = Common.settings;
+                state["FightOptions"] = this.FightOptions;
+                callLua("Set()");
             ltloaded_ = true;
         }
         private void LTWorking()
@@ -115,38 +113,36 @@ import ('System.Drawing')");
             try
             {
                 state_ = new Lua();
-                LTInit(state_);
-                while (true)
+                LTInit(ref state_);
+                while (state_ != null)
                 {
                     LuaMsg msg;
                     if (ltqueue.TryDequeue(out msg))
                     {
-                        lock (ltlock)
+                        switch (msg.type)
                         {
-                            switch (msg.type)
-                            {
-                                case LuaMsgType.Do:
-                                    state_.DoString((string)msg.param[0]);
-                                    break;
-                                case LuaMsgType.Start:
-                                    while (IsFighting)
-                                    {
-                                        state_.DoString("Fight()");
-                                    }
-                                    break;
-                                case LuaMsgType.Destory:
-                                    state_.Close();
-                                    state_.Dispose();
-                                    return;
-                                default:
-                                    break;
-                            }
-                            Thread.Sleep(FightOptions.interval);
+                            case LuaMsgType.Do:
+                                state_.DoString((string)msg.param[0]);
+                                break;
+                            case LuaMsgType.Start:
+                                while (IsFighting)
+                                {
+                                    state_.DoString("Fight()");
+                                }
+                                break;
+                            case LuaMsgType.Destory:
+                                state_.Close();
+                                state_.Dispose();
+                                state_ = null;
+                                return;
+                            default:
+                                break;
                         }
+                        Thread.Sleep(FightOptions.interval);
                     }
                     else
                     {
-                        Thread.Yield();
+                    Thread.Yield();
                     }
                 }
             }
@@ -235,12 +231,6 @@ import ('System.Drawing')");
             }
             IsFighting = true;
             //TODO: 传入对象
-            lock (ltlock)
-            {
-                state_["Settings"] = Common.settings;
-                state_["FightOptions"] = this.FightOptions;
-                callLua("Set()");
-            }
             //TODO: start fight processing
             NotifyLua(LuaMsgType.Start, null);
             return true;
@@ -273,27 +263,36 @@ import ('System.Drawing')");
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)。
-                    if (lthread !=null && lthread.IsAlive)
-                    {
-                        NotifyLua(LuaMsgType.Destory, null);
-                        if (lthread.Join(3* 1000))
-                        {
-                            try
-                            {
-                                lthread.Abort();
-                            }
-                            catch (ThreadAbortException)
-                            {
-                            }
-                        }
-                        
-                    }
 
                 }
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
+                if (lthread != null && lthread.IsAlive)
+                {
+                    IsFighting = false;
+                    NotifyLua(LuaMsgType.Destory, null);
+                    if (!lthread.Join(3 * 1000))
+                    {
+                        //3秒内没有结束则强行终止线程
+                        try
+                        {
+                            lthread.Abort();
+                        }
+                        catch (ThreadAbortException)
+                        {
+                        }
+                    }
+
+                }
+                if (state_ != null)
+                {
+                    state_.Dispose();
+                }
                 // TODO: 将大型字段设置为 null。
+                state_ = null;
+                ltqueue = null;
+                lthread = null;
+
                 disposedValue = true;
-                IsFighting = false;
             }
         }
 

@@ -79,17 +79,9 @@ namespace Config
 #endif
                 remote_ = remote;
 
-                StreamReader reader;
-                {
-                    reader = new StreamReader(Request("/config.xml").GetResponseStream());
-                    Parse(reader.ReadToEnd());
-                    reader.Dispose();
-                }
-                {
-                    reader = new StreamReader(Request("/verify.xml").GetResponseStream());
-                    ParseVerify(reader.ReadToEnd());
-                    //reader.Dispose();
-                }
+                LoadConfigFile("/config.xml", Parse);
+                LoadConfigFile("/verify.xml", ParseVerify);
+
                 loaded_ = true;
                 return true;
             }
@@ -113,7 +105,20 @@ namespace Config
                 throw;
             }
         }
-
+        private delegate void ParseCallBack(string str);
+        private static void LoadConfigFile(string path, ParseCallBack callback)
+        {
+            using (WebResponse response = Request(path))
+            {
+                Stream stream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                {
+                    callback(reader.ReadToEnd());
+                }
+                reader.Close();
+                stream.Close();
+            }
+        }
         public static XmlNodeList AllNodes
         {
             get
@@ -138,14 +143,16 @@ namespace Config
                         Load();
                     }
                     string luaUri = xmlRoot_.SelectSingleNode("lua").InnerText;
-                    StreamReader reader = new StreamReader(Request(luaUri).GetResponseStream());
-                    char[] buffer = new char[3];
-                    reader.ReadBlock(buffer, 0, 3);
-                    if (buffer[0] == 14 && buffer[1] == 146 && buffer[2] == 250)
+                    using ( StreamReader reader = new StreamReader(Request(luaUri).GetResponseStream()) )
                     {
-                        return DESEncrypt.Decrypt(reader.ReadToEnd());
+                        char[] buffer = new char[3];
+                        reader.ReadBlock(buffer, 0, 3);
+                        if (buffer[0] == 14 && buffer[1] == 146 && buffer[2] == 250)
+                        {
+                            return DESEncrypt.Decrypt(reader.ReadToEnd());
+                        }
+                        return new string(buffer) + reader.ReadToEnd();
                     }
-                    return new string(buffer) + reader.ReadToEnd();
                 }
                 catch (ConfigException e)
                 {

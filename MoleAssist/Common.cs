@@ -74,26 +74,11 @@ namespace MoleAssist
         {
             System.Windows.Forms.MessageBox.Show(str, caption);
         }
-        public static void Repaint(IntPtr hWnd, Point p)
-        {
-            const uint WM_LBUTTONDOWN = 0x0201;
-            const uint WM_LBUTTONUP = 0x202;
-            IntPtr MK_LBUTTON = new IntPtr(0x0001);
-            PostMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, mklong(p.X, p.Y));
-            PostMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, mklong(p.X, p.Y));
-        }
-        public struct RECT
-        {
-            long left;
-            long top;
-            long right;
-            long bottom;
-        }
         [LuaFunction]
         [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern int InvalidateRect(
             IntPtr hWnd,
-            object lpRect,
+            Rectangle lpRect,
             bool bErase
             );
         [LuaFunction]
@@ -164,9 +149,11 @@ namespace MoleAssist
         /// <returns></returns>
         public static string SendFile(string fileName, string encodingType = "UTF-8")
         {
-            WebClient myWebClient = new WebClient();
-            byte[] responseArray = myWebClient.UploadFile("http://updata.xyh968200.goodrain.net/upload_file.php", "POST", fileName);
-            return Encoding.GetEncoding(encodingType).GetString(responseArray);
+            using (WebClient myWebClient = new WebClient())
+            {
+                byte[] responseArray = myWebClient.UploadFile("http://updata.xyh968200.goodrain.net/upload_file.php", "POST", fileName);
+                return Encoding.GetEncoding(encodingType).GetString(responseArray);
+            }
         }
 
         /// <summary>
