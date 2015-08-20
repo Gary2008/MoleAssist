@@ -211,5 +211,27 @@ namespace MoleAssist
             return (_R <= p_CompareColor.R + p_Float && _R >= p_CompareColor.R - p_Float) && (_G <= p_CompareColor.G + p_Float && _G >= p_CompareColor.G - p_Float) && (_B <= p_CompareColor.B + p_Float && _B >= p_CompareColor.B - p_Float);
         }
         #endregion
+
+        /// <summary>
+        /// 截取一张图片的指定部分
+        /// </summary>
+        /// <param name="bitmapPathAndName">原始图片路径</param>
+        /// <param name="width">截取图片的宽度</param>
+        /// <param name="height">截取图片的高度</param>
+        /// <param name="offsetX">开始截取的X坐标</param>
+        /// <param name="offsetY">开始截取的Y坐标</param>
+        /// <returns></returns>
+        public static Bitmap cut(Bitmap sourceBitmap, int offsetX = 335, int offsetY = 210, int width = 522, int height = 235)
+        {
+            Bitmap resultBitmap = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(resultBitmap))
+            {
+                Rectangle sourceRectangle = new Rectangle(0 + offsetX, 0 + offsetY, width, height);
+                Rectangle resultRectangle = new Rectangle(0, 0, width, height);
+                g.DrawImage(sourceBitmap, resultRectangle, sourceRectangle, GraphicsUnit.Pixel);
+            }
+            return resultBitmap;
+        }
+
     }
 }

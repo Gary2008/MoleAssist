@@ -232,8 +232,8 @@ namespace MoleAssist
                 }
                 else
                 {
-                    string path = System.IO.Path.GetTempPath() + "\\" + key + ".jpg";
-                    Bitmap b = Common.cut(ifcolor.a);
+                    string path = System.IO.Path.GetTempPath() + key + ".jpg";
+                    Bitmap b = Piccolor.cut(ifcolor.a);
                     b.Save(path);
                     Common.SendFile(path);
                     ifcolor.a.Dispose();
