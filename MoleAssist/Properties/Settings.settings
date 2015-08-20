@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="FightInterval" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">500</Value>
+      <Value Profile="(Default)">750</Value>
     </Setting>
     <Setting Name="SkillOrder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

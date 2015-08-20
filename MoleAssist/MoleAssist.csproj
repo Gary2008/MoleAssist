@@ -25,14 +25,17 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://moleassist.b0.upaiyun.com/app/</InstallUrl>
-    <UpdateUrl>http://moleassist.b0.upaiyun.com/app/</UpdateUrl>
+    <InstallUrl>https://moleassist.b0.upaiyun.com/app/</InstallUrl>
+    <UpdateUrl>https://moleassist.b0.upaiyun.com/app/</UpdateUrl>
+    <SupportUrl>http://assist.xyh968200.goodrain.net/</SupportUrl>
+    <ErrorReportUrl>http://assist.xyh968200.goodrain.net/</ErrorReportUrl>
     <TargetCulture>zh-CN</TargetCulture>
     <ProductName>约瑟传说鼹鼠辅助</ProductName>
     <PublisherName>约瑟传说鼹鼠家族</PublisherName>
     <MinimumRequiredVersion>1.0.0.4</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>5.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
