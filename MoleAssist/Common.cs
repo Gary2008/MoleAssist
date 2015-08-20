@@ -77,18 +77,6 @@ namespace MoleAssist
             System.Windows.Forms.MessageBox.Show(str, caption);
         }
         [LuaFunction]
-        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-        public static extern int InvalidateRect(
-            IntPtr hWnd,
-            Rectangle lpRect,
-            bool bErase
-            );
-        [LuaFunction]
-        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-        public static extern int UpdateWindow(
-            IntPtr hWnd
-            );
-        [LuaFunction]
         [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true ) ]
         private static extern int PostMessage(
             IntPtr hWnd,

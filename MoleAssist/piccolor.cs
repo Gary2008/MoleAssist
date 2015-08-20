@@ -58,6 +58,24 @@ namespace MoleAssist
         [DllImport("user32.dll")]
         public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
 
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(
+            IntPtr hwnd,
+            out Rectangle rect
+        );
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        public static extern int InvalidateRect(
+            IntPtr hWnd,
+            Rectangle lpRect,
+            bool bErase
+            );
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        public static extern int UpdateWindow(
+            IntPtr hWnd
+            );
+
         #region 获取游戏图像
         public static Bitmap GetWindow(IntPtr hWnd)    //hWnd可以是窗口、控件等的handle，因此这种方法截我们想要的部分非常好用。
         {
@@ -67,6 +85,9 @@ namespace MoleAssist
             IntPtr hmemdc = CreateCompatibleDC(hscrdc);
             SelectObject(hmemdc, hbitmap);
             bool re = PrintWindow(hWnd, hmemdc, 0);
+            //重画窗口，防止卡屏现象
+            InvalidateRect(hWnd, control.DisplayRectangle, true);
+            UpdateWindow(hWnd);
             Bitmap bmp = null;
             if (re)
             {

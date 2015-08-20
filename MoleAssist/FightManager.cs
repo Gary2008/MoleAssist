@@ -125,9 +125,10 @@ import ('System.Drawing')");
                             case LuaMsgType.Start:
                                 state_["Settings"] = Common.settings;
                                 state_["FightOptions"] = this.FightOptions;
-                                callLua("Set()");
+                                state_.DoString("Set()");
                                 while (IsFighting)
                                 {
+                                    ifcolor.rebitmap();
                                     state_.DoString("Fight()");
                                     Thread.Sleep(FightOptions.interval);
                                 }
