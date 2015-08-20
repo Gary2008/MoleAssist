@@ -56,7 +56,6 @@
             this.btn_start = new System.Windows.Forms.Button();
             this.tabControl_Main = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox_interval = new System.Windows.Forms.TextBox();
             this.textBox_customY = new System.Windows.Forms.TextBox();
             this.textBox_customX = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -350,7 +349,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox_interval);
             this.tabPage1.Controls.Add(this.textBox_customY);
             this.tabPage1.Controls.Add(this.radio_modeSelect1);
             this.tabPage1.Controls.Add(this.textBox_customX);
@@ -367,16 +365,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "自动刷怪";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // textBox_interval
-            // 
-            this.textBox_interval.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MoleAssist.Properties.Settings.Default, "FightInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_interval.Location = new System.Drawing.Point(115, 5);
-            this.textBox_interval.Name = "textBox_interval";
-            this.textBox_interval.Size = new System.Drawing.Size(30, 21);
-            this.textBox_interval.TabIndex = 16;
-            this.textBox_interval.Text = global::MoleAssist.Properties.Settings.Default.FightInterval;
-            this.textBox_interval.Visible = false;
             // 
             // textBox_customY
             // 
@@ -693,7 +681,6 @@
         private System.Windows.Forms.Button btn_clearCache;
         private System.Windows.Forms.TextBox textBox_customY;
         private System.Windows.Forms.TextBox textBox_customX;
-        private System.Windows.Forms.TextBox textBox_interval;
         private System.Windows.Forms.ComboBox combo_identifyFailed;
         private System.Windows.Forms.CheckBox checkBox_isAutoIdentify;
         private System.Windows.Forms.CheckBox checkBox_ReHP;

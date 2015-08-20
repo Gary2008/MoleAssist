@@ -101,7 +101,7 @@ namespace MoleAssist
                             );
                     Common.UpdateFlashHandle(webBrowser_game.Handle);
                     GlobalFight.FightOptions.handle = Common.hGame;
-                    GlobalFight.FightOptions.interval = int.Parse(textBox_interval.Text);
+                    GlobalFight.FightOptions.interval = Common.settings.FightInterval;
                     GlobalFight.FightOptions.type = Enum.GetName(typeof(FightType), type);
                     GlobalFight.FightOptions.skillMode = combo_skillMode.SelectedIndex;
                     GlobalFight.FightOptions.skillOrder = textbox_SkillOrder.Text;

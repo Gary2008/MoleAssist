@@ -26,9 +26,9 @@ namespace MoleAssist.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public string FightInterval {
+        public int FightInterval {
             get {
-                return ((string)(this["FightInterval"]));
+                return ((int)(this["FightInterval"]));
             }
         }
         
