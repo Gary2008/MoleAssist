@@ -90,7 +90,6 @@ namespace MoleAssist
         {
             int _SourceWidth = p_SourceBitmap.Width;
             int _SourceHeight = p_SourceBitmap.Height;
-
             int _PartWidth = p_PartBitmap.Width;
             int _PartHeight = p_PartBitmap.Height;
 
@@ -137,8 +136,12 @@ namespace MoleAssist
                         }
                     }
                 }
+                _SourceBitmap.Dispose();
+                _PartBitmap.Dispose();
                 if (_SacnOver) return new Point(_PointX, i);
             }
+            _SourceBitmap.Dispose();
+            _PartBitmap.Dispose();
             return new Point(-1, -1);
         }
         /// <summary>

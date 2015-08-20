@@ -291,7 +291,6 @@ namespace MoleAssist
         {
             if (ifcolor.FindAndClickMonster())
             {
-                 
             }
             else
             {
