@@ -6,8 +6,10 @@ function MsgBox(str)
 	MessageBox.Show(str, "")
 end
 
-_G.use = 0 -- used skill index
-_G.skillTable = {}
+use = 0 -- used skill index
+skillTable = {}
+findInterval = 5
+lastfind = os.clock() - findInterval
 
 -- function initialize these values
 function Set()
@@ -59,7 +61,9 @@ function Fight()
 	-- Trace("5")
 	FightCall_SkillLvUp()
 	-- Trace("6")
-	FightCall_hasVerify()
+	if FightCall_hasVerify() == 2 then
+		MessageBox.Show("出现了无法识别的验证！！！", "!!!")
+	end
 	-- Trace("7")
 	if FightCall_FightEnd() == true then
 		use = 0
@@ -89,6 +93,10 @@ end
 
 function FightWild()
 	Trace("Find!")
+	if (os.clock() - lastfind < findInterval) then
+		return
+	end
+	lastfind = os.clock()
 	FightCall_FindAndClickMonster()
 end
 
@@ -97,6 +105,11 @@ function FightNPC(npc)
 end
 
 function FightCustomPoint(point)
+	Trace("Find!")
+	if (os.clock() - lastfind < findInterval) then
+		return
+	end
+	lastfind = os.clock()
 	Click(point.X, point.Y)
 end
 
