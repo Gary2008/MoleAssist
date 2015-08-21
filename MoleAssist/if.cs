@@ -164,7 +164,7 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_", FuncName: "couldUseSkill")]
         public static bool IfFight()
         {
-            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(327, 576)) == 14861418)
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(327, 576)) == 14861418 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(515, 576)) == 14861418)
             {
                 return true;
             }
@@ -293,13 +293,16 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_", FuncName: "ReplacePet")]
         public static void ReplaceGhost()
         {
-            Common.Click(1134,619);
-            //Todo:点击换场         1134,619
             if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(428, 645)) == 16315888)
             {
                 Common.Click(463, 605);
+                //Todo:点击第二位精灵   463,605
             }
-            //Todo:点击第二位精灵   463,605
+            else
+            {
+                Common.Click(1134, 619);
+                //Todo:点击换场         1134,619
+            }
         }
     }
 }
