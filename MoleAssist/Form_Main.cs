@@ -109,7 +109,6 @@ namespace MoleAssist
                     GlobalFight.FightOptions.ReHP = checkBox_ReHP.Checked;
                     GlobalFight.FightOptions.useAnger = checkBox_useAnger.Checked;
                     GlobalFight.FightOptions.qucikTraining = checkBox_qucikTraining.Checked;
-                    GlobalFight.FightOptions.couldHiddenMode = checkBox_couldHiddenMode.Checked;
                     switch (type)
                     {
                         case FightType.Wild:
@@ -220,6 +219,29 @@ namespace MoleAssist
             {
                 e.Handled = true;
             }
+        }
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            groupBox2.Visible = true;
+            pictureBox1.Visible = false;
+            pictureBox2.Visible = true;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            groupBox2.Visible = false;
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = false;
+        }
+
+            
+
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            pictureBox3.Visible = false;
         }
     }
 }
