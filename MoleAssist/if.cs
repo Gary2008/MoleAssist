@@ -134,6 +134,23 @@ namespace MoleAssist
                 return true;
         }
         /// <summary>
+        /// 寻找并点击野怪
+        /// </summary>
+        /// <param name="hwnd"></param>
+        /// <returns></returns>
+        [LuaFunction(Prefix: "FightCall_")]
+        public static bool NONONO()
+        {
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(568, 416)) == 15855521 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(657, 416)) == 15855521)
+            {
+                Common.Click(1094, 221);
+                //Todo：点击1094,221
+                return true;
+            }
+            return false;
+
+        }
+        /// <summary>
         /// 传入自定义坐标
         /// </summary>
         /// <param name="x"></param>
