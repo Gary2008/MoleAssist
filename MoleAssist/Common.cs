@@ -145,8 +145,5 @@ namespace MoleAssist
                 return Encoding.GetEncoding(encodingType).GetString(responseArray);
             }
         }
-
-
-
     }
 }

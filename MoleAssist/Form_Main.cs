@@ -10,6 +10,7 @@ namespace MoleAssist
 {
     public partial class Form_Main : Form
     {
+        Form2 form2 = new Form2();
         private static FightManager GlobalFight = new FightManager(ConfigManager.LuaScript);
         public Form_Main()
         {
@@ -18,6 +19,9 @@ namespace MoleAssist
 
         private void Form_Main_Load(object sender, EventArgs e)
         {
+            form2.Show();
+            form2.Owner = this;
+            form2.Visible = false;
             combo_skillMode.SelectedIndex = 0;
             combo_identifyFailed.SelectedIndex = 0;
             List<Config.Functions> enabledFunctions = (List<Config.Functions>) ConfigManager.Get(Config.Item.Functions);
@@ -390,6 +394,13 @@ namespace MoleAssist
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             pictureBox3.Visible = false;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            form2.Visible = true;
+            this.Location = new Point(-1217, 0);
+            this.ShowInTaskbar = false;
         }
     }
 }

@@ -129,6 +129,12 @@
     <Compile Include="ConfigException.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="FightManager.cs" />
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     <None Include="MoleAssist.pfx" />
     <None Include="Resources\new.bmp" />
     <None Include="Resources\lv.bmp" />
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Main.resx">
       <DependentUpon>Form_Main.cs</DependentUpon>
     </EmbeddedResource>
