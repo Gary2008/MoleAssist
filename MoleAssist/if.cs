@@ -195,7 +195,7 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_", FuncName: "hasVerify")]
         public static int IfVerify()
         {
-            if ((ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 219)) == 16776960 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 220)) == 16776960 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 220)) == 11837952) && ColorTranslator.ToWin32(ifcolor.a.GetPixel(516, 411)) == 3407871)
+            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(513, 412)) == 3407871 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(516, 411)) == 3407871)
             {
                 int key =ColorTranslator.ToWin32(ifcolor.a.GetPixel(418, 305)) +
                          ColorTranslator.ToWin32(ifcolor.a.GetPixel(418, 326)) +
