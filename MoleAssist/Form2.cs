@@ -36,6 +36,7 @@ namespace MoleAssist
         private void Form2_Load(object sender, EventArgs e)
         {
             this.ShowInTaskbar = false;
+            this.Opacity = 0.9;
         }
         private void Form2_MouseDoubleClick(object sender, EventArgs e)
         {

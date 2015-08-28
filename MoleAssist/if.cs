@@ -64,7 +64,7 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_")]
         public static bool FightEnd()
         {
-            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(542, 196)) == 2866687 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(603, 197)) == 3392255)
+            if ((ColorTranslator.ToWin32(ifcolor.a.GetPixel(542, 196)) == 2866687 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(542, 196)) == 2538495) && (ColorTranslator.ToWin32(ifcolor.a.GetPixel(603, 197)) == 3392255 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(603, 197)) == 3129599))//第二个为流畅模式
             {
                  Common.Click(543, 469);
                 //Todo：点击543,469确定按钮
@@ -78,8 +78,8 @@ namespace MoleAssist
         /// <param name="hwnd"></param>
         [LuaFunction(Prefix: "FightCall_")]
         public static bool SkillLvUp()
-        {
-            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(189, 222)) == 6908428 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(587, 461)) == 16377170)
+        {//--------------------------------------普通画质----------------------------------------------流畅完美画质-----------
+            if ((ColorTranslator.ToWin32(ifcolor.a.GetPixel(189, 223)) == 15327770 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(189, 223)) == 16052493) && ColorTranslator.ToWin32(ifcolor.a.GetPixel(587, 461)) == 16377170)
             {
                 Common.Click(587, 469);
                 //Todo：点击587,469确定按钮
@@ -195,7 +195,7 @@ namespace MoleAssist
         [LuaFunction(Prefix: "FightCall_", FuncName: "hasVerify")]
         public static int IfVerify()
         {
-            if (ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 219)) == 16776960 && ColorTranslator.ToWin32(ifcolor.a.GetPixel(516, 411)) == 3407871)
+            if ((ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 219)) == 16776960 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 220)) == 16776960 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(347, 220)) == 11837952) && ColorTranslator.ToWin32(ifcolor.a.GetPixel(516, 411)) == 3407871)
             {
                 int key =ColorTranslator.ToWin32(ifcolor.a.GetPixel(418, 305)) +
                          ColorTranslator.ToWin32(ifcolor.a.GetPixel(418, 326)) +

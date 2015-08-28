@@ -40,13 +40,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form2";
             this.Text = "Form2";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
-            this.MouseDown += this.Form2_MouseDown;
-            this.MouseMove += this.Form2_MouseMove;
-            this.MouseDoubleClick += this.Form2_MouseDoubleClick;
-            //this.MouseDown += this.Form2_MouseDown;
-            //this.MouseMove += this.Form2_MouseMove;
+
         }
 
         #endregion

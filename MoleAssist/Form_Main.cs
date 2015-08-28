@@ -140,13 +140,13 @@ namespace MoleAssist
                     }
                     //开启刷怪线程
                     GlobalFight.Start();
-                    btn_start.Text = "结束";
+                    btn_start.Text = "结束ALT+(&s)";
                 }
                 else
                 {
                     //此时GlobalFight.IsFighting为真，需要结束
                     GlobalFight.Stop();
-                    btn_start.Text = "开始";
+                    btn_start.Text = "开始ALT+(&s)";
                 }
             }
             catch (InputInvailedException exception)
@@ -376,14 +376,14 @@ namespace MoleAssist
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            groupBox2.Visible = true;
+            panel1.Visible = true;
             pictureBox1.Visible = false;
             pictureBox2.Visible = true;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            groupBox2.Visible = false;
+            panel1.Visible = false;
             pictureBox1.Visible = true;
             pictureBox2.Visible = false;
         }

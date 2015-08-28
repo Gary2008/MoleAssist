@@ -54,7 +54,7 @@
             this.button13 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button14 = new System.Windows.Forms.Button();
             this.btn_clearCache = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btn_refreshGame = new System.Windows.Forms.Button();
@@ -77,12 +77,12 @@
             this.textBox_customX = new System.Windows.Forms.TextBox();
             this.checkBox_ReHP = new System.Windows.Forms.CheckBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.button14 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             label_skillOrder = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_skillOrder
@@ -90,7 +90,7 @@
             label_skillOrder.AutoSize = true;
             label_skillOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             label_skillOrder.ForeColor = System.Drawing.Color.White;
-            label_skillOrder.Location = new System.Drawing.Point(31, 196);
+            label_skillOrder.Location = new System.Drawing.Point(45, 204);
             label_skillOrder.Name = "label_skillOrder";
             label_skillOrder.Size = new System.Drawing.Size(89, 12);
             label_skillOrder.TabIndex = 7;
@@ -271,44 +271,23 @@
             this.pictureBox2.Visible = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // groupBox2
+            // button14
             // 
-            this.groupBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox2.BackgroundImage")));
-            this.groupBox2.Controls.Add(this.button14);
-            this.groupBox2.Controls.Add(this.btn_clearCache);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.btn_refreshGame);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.checkBox_onTop);
-            this.groupBox2.Controls.Add(this.radio_modeSelect1);
-            this.groupBox2.Controls.Add(this.textbox_SkillOrder);
-            this.groupBox2.Controls.Add(this.textBox_customY);
-            this.groupBox2.Controls.Add(label_skillOrder);
-            this.groupBox2.Controls.Add(this.combo_skillMode);
-            this.groupBox2.Controls.Add(this.btn_getxy);
-            this.groupBox2.Controls.Add(this.combo_identifyFailed);
-            this.groupBox2.Controls.Add(this.radio_modeSelect2);
-            this.groupBox2.Controls.Add(this.checkBox_alert);
-            this.groupBox2.Controls.Add(this.radio_modeSelect3);
-            this.groupBox2.Controls.Add(this.checkBox_qucikTraining);
-            this.groupBox2.Controls.Add(this.combo_NPCSelect);
-            this.groupBox2.Controls.Add(this.checkBox_isAutoIdentify);
-            this.groupBox2.Controls.Add(this.btn_start);
-            this.groupBox2.Controls.Add(this.checkBox_useAnger);
-            this.groupBox2.Controls.Add(this.textBox_customX);
-            this.groupBox2.Controls.Add(this.checkBox_ReHP);
-            this.groupBox2.Location = new System.Drawing.Point(949, 123);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(221, 415);
-            this.groupBox2.TabIndex = 33;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Visible = false;
+            this.button14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
+            this.button14.ForeColor = System.Drawing.Color.White;
+            this.button14.Location = new System.Drawing.Point(142, 338);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(75, 23);
+            this.button14.TabIndex = 16;
+            this.button14.Text = "悬浮窗模式";
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // btn_clearCache
             // 
             this.btn_clearCache.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.btn_clearCache.ForeColor = System.Drawing.Color.White;
-            this.btn_clearCache.Location = new System.Drawing.Point(128, 356);
+            this.btn_clearCache.Location = new System.Drawing.Point(142, 364);
             this.btn_clearCache.Name = "btn_clearCache";
             this.btn_clearCache.Size = new System.Drawing.Size(75, 23);
             this.btn_clearCache.TabIndex = 2;
@@ -321,7 +300,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(55, 170);
+            this.label3.Location = new System.Drawing.Point(69, 178);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 11;
@@ -331,7 +310,7 @@
             // 
             this.btn_refreshGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.btn_refreshGame.ForeColor = System.Drawing.Color.White;
-            this.btn_refreshGame.Location = new System.Drawing.Point(26, 356);
+            this.btn_refreshGame.Location = new System.Drawing.Point(40, 364);
             this.btn_refreshGame.Name = "btn_refreshGame";
             this.btn_refreshGame.Size = new System.Drawing.Size(75, 23);
             this.btn_refreshGame.TabIndex = 1;
@@ -344,7 +323,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(25, 298);
+            this.label2.Location = new System.Drawing.Point(39, 306);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 12);
             this.label2.TabIndex = 10;
@@ -357,7 +336,7 @@
             this.checkBox_onTop.Checked = global::MoleAssist.Properties.Settings.Default.OnTop;
             this.checkBox_onTop.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "OnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_onTop.ForeColor = System.Drawing.Color.White;
-            this.checkBox_onTop.Location = new System.Drawing.Point(26, 334);
+            this.checkBox_onTop.Location = new System.Drawing.Point(40, 342);
             this.checkBox_onTop.Name = "checkBox_onTop";
             this.checkBox_onTop.Size = new System.Drawing.Size(72, 16);
             this.checkBox_onTop.TabIndex = 0;
@@ -371,7 +350,7 @@
             this.radio_modeSelect1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.radio_modeSelect1.Checked = true;
             this.radio_modeSelect1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.radio_modeSelect1.Location = new System.Drawing.Point(24, 49);
+            this.radio_modeSelect1.Location = new System.Drawing.Point(38, 57);
             this.radio_modeSelect1.Name = "radio_modeSelect1";
             this.radio_modeSelect1.Size = new System.Drawing.Size(83, 16);
             this.radio_modeSelect1.TabIndex = 1;
@@ -384,7 +363,7 @@
             this.textbox_SkillOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.textbox_SkillOrder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MoleAssist.Properties.Settings.Default, "SkillOrder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textbox_SkillOrder.ForeColor = System.Drawing.Color.White;
-            this.textbox_SkillOrder.Location = new System.Drawing.Point(126, 193);
+            this.textbox_SkillOrder.Location = new System.Drawing.Point(140, 201);
             this.textbox_SkillOrder.Name = "textbox_SkillOrder";
             this.textbox_SkillOrder.Size = new System.Drawing.Size(71, 21);
             this.textbox_SkillOrder.TabIndex = 8;
@@ -395,7 +374,7 @@
             // 
             this.textBox_customY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.textBox_customY.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox_customY.Location = new System.Drawing.Point(167, 128);
+            this.textBox_customY.Location = new System.Drawing.Point(181, 136);
             this.textBox_customY.MaxLength = 6;
             this.textBox_customY.Name = "textBox_customY";
             this.textBox_customY.ReadOnly = true;
@@ -414,7 +393,7 @@
             this.combo_skillMode.Items.AddRange(new object[] {
             "单技能",
             "多技能"});
-            this.combo_skillMode.Location = new System.Drawing.Point(126, 167);
+            this.combo_skillMode.Location = new System.Drawing.Point(140, 175);
             this.combo_skillMode.Name = "combo_skillMode";
             this.combo_skillMode.Size = new System.Drawing.Size(67, 20);
             this.combo_skillMode.TabIndex = 6;
@@ -424,7 +403,7 @@
             // 
             this.btn_getxy.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_getxy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_getxy.Location = new System.Drawing.Point(121, 101);
+            this.btn_getxy.Location = new System.Drawing.Point(135, 109);
             this.btn_getxy.Name = "btn_getxy";
             this.btn_getxy.Size = new System.Drawing.Size(75, 20);
             this.btn_getxy.TabIndex = 9;
@@ -444,7 +423,7 @@
             "弹出窗口",
             "自动刷新",
             "随机点击"});
-            this.combo_identifyFailed.Location = new System.Drawing.Point(126, 295);
+            this.combo_identifyFailed.Location = new System.Drawing.Point(140, 303);
             this.combo_identifyFailed.Name = "combo_identifyFailed";
             this.combo_identifyFailed.Size = new System.Drawing.Size(72, 20);
             this.combo_identifyFailed.TabIndex = 5;
@@ -455,7 +434,7 @@
             this.radio_modeSelect2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.radio_modeSelect2.Enabled = false;
             this.radio_modeSelect2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.radio_modeSelect2.Location = new System.Drawing.Point(24, 75);
+            this.radio_modeSelect2.Location = new System.Drawing.Point(38, 83);
             this.radio_modeSelect2.Name = "radio_modeSelect2";
             this.radio_modeSelect2.Size = new System.Drawing.Size(83, 16);
             this.radio_modeSelect2.TabIndex = 2;
@@ -472,7 +451,7 @@
             this.checkBox_alert.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "alert", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_alert.Enabled = false;
             this.checkBox_alert.ForeColor = System.Drawing.Color.White;
-            this.checkBox_alert.Location = new System.Drawing.Point(126, 246);
+            this.checkBox_alert.Location = new System.Drawing.Point(140, 254);
             this.checkBox_alert.Name = "checkBox_alert";
             this.checkBox_alert.Size = new System.Drawing.Size(72, 16);
             this.checkBox_alert.TabIndex = 4;
@@ -484,7 +463,7 @@
             this.radio_modeSelect3.AutoSize = true;
             this.radio_modeSelect3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.radio_modeSelect3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.radio_modeSelect3.Location = new System.Drawing.Point(24, 103);
+            this.radio_modeSelect3.Location = new System.Drawing.Point(38, 111);
             this.radio_modeSelect3.Name = "radio_modeSelect3";
             this.radio_modeSelect3.Size = new System.Drawing.Size(83, 16);
             this.radio_modeSelect3.TabIndex = 3;
@@ -500,7 +479,7 @@
             this.checkBox_qucikTraining.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "qucikTraining", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_qucikTraining.Enabled = false;
             this.checkBox_qucikTraining.ForeColor = System.Drawing.Color.White;
-            this.checkBox_qucikTraining.Location = new System.Drawing.Point(37, 224);
+            this.checkBox_qucikTraining.Location = new System.Drawing.Point(51, 232);
             this.checkBox_qucikTraining.Name = "checkBox_qucikTraining";
             this.checkBox_qucikTraining.Size = new System.Drawing.Size(72, 16);
             this.checkBox_qucikTraining.TabIndex = 3;
@@ -524,7 +503,7 @@
             "涟漪",
             "斩灵",
             "百魁"});
-            this.combo_NPCSelect.Location = new System.Drawing.Point(123, 74);
+            this.combo_NPCSelect.Location = new System.Drawing.Point(137, 82);
             this.combo_NPCSelect.Name = "combo_NPCSelect";
             this.combo_NPCSelect.Size = new System.Drawing.Size(73, 20);
             this.combo_NPCSelect.TabIndex = 4;
@@ -539,7 +518,7 @@
             this.checkBox_isAutoIdentify.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "isAutoIdentify", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_isAutoIdentify.Enabled = false;
             this.checkBox_isAutoIdentify.ForeColor = System.Drawing.Color.White;
-            this.checkBox_isAutoIdentify.Location = new System.Drawing.Point(37, 268);
+            this.checkBox_isAutoIdentify.Location = new System.Drawing.Point(51, 276);
             this.checkBox_isAutoIdentify.Name = "checkBox_isAutoIdentify";
             this.checkBox_isAutoIdentify.Size = new System.Drawing.Size(84, 16);
             this.checkBox_isAutoIdentify.TabIndex = 2;
@@ -550,11 +529,11 @@
             // 
             this.btn_start.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_start.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_start.Location = new System.Drawing.Point(24, 128);
+            this.btn_start.Location = new System.Drawing.Point(38, 136);
             this.btn_start.Name = "btn_start";
             this.btn_start.Size = new System.Drawing.Size(89, 23);
             this.btn_start.TabIndex = 10;
-            this.btn_start.Text = "开始";
+            this.btn_start.Text = "开始ALT+(&s)";
             this.btn_start.UseVisualStyleBackColor = false;
             this.btn_start.Click += new System.EventHandler(this.btn_start_Click);
             // 
@@ -567,7 +546,7 @@
             this.checkBox_useAnger.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "useAnger", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_useAnger.Enabled = false;
             this.checkBox_useAnger.ForeColor = System.Drawing.Color.White;
-            this.checkBox_useAnger.Location = new System.Drawing.Point(126, 224);
+            this.checkBox_useAnger.Location = new System.Drawing.Point(140, 232);
             this.checkBox_useAnger.Name = "checkBox_useAnger";
             this.checkBox_useAnger.Size = new System.Drawing.Size(72, 16);
             this.checkBox_useAnger.TabIndex = 1;
@@ -578,7 +557,7 @@
             // 
             this.textBox_customX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
             this.textBox_customX.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox_customX.Location = new System.Drawing.Point(123, 128);
+            this.textBox_customX.Location = new System.Drawing.Point(137, 136);
             this.textBox_customX.MaxLength = 6;
             this.textBox_customX.Name = "textBox_customX";
             this.textBox_customX.ReadOnly = true;
@@ -595,7 +574,7 @@
             this.checkBox_ReHP.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_ReHP.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MoleAssist.Properties.Settings.Default, "ReHP", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBox_ReHP.ForeColor = System.Drawing.Color.White;
-            this.checkBox_ReHP.Location = new System.Drawing.Point(37, 246);
+            this.checkBox_ReHP.Location = new System.Drawing.Point(51, 254);
             this.checkBox_ReHP.Name = "checkBox_ReHP";
             this.checkBox_ReHP.Size = new System.Drawing.Size(72, 16);
             this.checkBox_ReHP.TabIndex = 0;
@@ -612,17 +591,37 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
-            // button14
+            // panel1
             // 
-            this.button14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(89)))), ((int)(((byte)(174)))));
-            this.button14.ForeColor = System.Drawing.Color.White;
-            this.button14.Location = new System.Drawing.Point(128, 330);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(75, 23);
-            this.button14.TabIndex = 16;
-            this.button14.Text = "悬浮窗模式";
-            this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.button14);
+            this.panel1.Controls.Add(label_skillOrder);
+            this.panel1.Controls.Add(this.btn_clearCache);
+            this.panel1.Controls.Add(this.checkBox_ReHP);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.textBox_customX);
+            this.panel1.Controls.Add(this.btn_refreshGame);
+            this.panel1.Controls.Add(this.checkBox_useAnger);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.btn_start);
+            this.panel1.Controls.Add(this.checkBox_onTop);
+            this.panel1.Controls.Add(this.checkBox_isAutoIdentify);
+            this.panel1.Controls.Add(this.radio_modeSelect1);
+            this.panel1.Controls.Add(this.combo_NPCSelect);
+            this.panel1.Controls.Add(this.textbox_SkillOrder);
+            this.panel1.Controls.Add(this.checkBox_qucikTraining);
+            this.panel1.Controls.Add(this.textBox_customY);
+            this.panel1.Controls.Add(this.radio_modeSelect3);
+            this.panel1.Controls.Add(this.checkBox_alert);
+            this.panel1.Controls.Add(this.combo_skillMode);
+            this.panel1.Controls.Add(this.radio_modeSelect2);
+            this.panel1.Controls.Add(this.btn_getxy);
+            this.panel1.Controls.Add(this.combo_identifyFailed);
+            this.panel1.Location = new System.Drawing.Point(916, 117);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(254, 427);
+            this.panel1.TabIndex = 36;
+            this.panel1.Visible = false;
             // 
             // Form_Main
             // 
@@ -631,9 +630,9 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1200, 661);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.webBrowser_game);
             this.Controls.Add(this.button13);
@@ -658,9 +657,9 @@
             this.Load += new System.EventHandler(this.Form_Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -705,9 +704,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
