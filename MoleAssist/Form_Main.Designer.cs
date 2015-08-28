@@ -78,6 +78,7 @@
             this.checkBox_ReHP = new System.Windows.Forms.CheckBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button15 = new System.Windows.Forms.Button();
             label_skillOrder = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -594,6 +595,7 @@
             // panel1
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.button15);
             this.panel1.Controls.Add(this.button14);
             this.panel1.Controls.Add(label_skillOrder);
             this.panel1.Controls.Add(this.btn_clearCache);
@@ -622,6 +624,17 @@
             this.panel1.Size = new System.Drawing.Size(254, 427);
             this.panel1.TabIndex = 36;
             this.panel1.Visible = false;
+            // 
+            // button15
+            // 
+            this.button15.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.button15.Location = new System.Drawing.Point(89, 393);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(75, 23);
+            this.button15.TabIndex = 17;
+            this.button15.Text = "BUG反馈";
+            this.button15.UseVisualStyleBackColor = false;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // Form_Main
             // 
@@ -707,6 +720,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button15;
     }
 }
 

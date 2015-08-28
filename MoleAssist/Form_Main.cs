@@ -402,5 +402,10 @@ namespace MoleAssist
             this.Location = new Point(-1217, 0);
             this.ShowInTaskbar = false;
         }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://bug.moleassist.tk");
+        }
     }
 }

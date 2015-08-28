@@ -78,7 +78,7 @@ namespace MoleAssist
         /// <param name="hwnd"></param>
         [LuaFunction(Prefix: "FightCall_")]
         public static bool SkillLvUp()
-        {//--------------------------------------普通画质----------------------------------------------流畅完美画质-----------
+        {//--------------------------------------普通画质--------------------------------------------------流畅完美画质-----------
             if ((ColorTranslator.ToWin32(ifcolor.a.GetPixel(189, 223)) == 15327770 || ColorTranslator.ToWin32(ifcolor.a.GetPixel(189, 223)) == 16052493) && ColorTranslator.ToWin32(ifcolor.a.GetPixel(587, 461)) == 16377170)
             {
                 Common.Click(587, 469);
