@@ -1,3 +1,4 @@
+#pragma once
 // 下列 ifdef 块是创建使从 DLL 导出更简单的
 // 宏的标准方法。此 DLL 中的所有文件都是用命令行上定义的 INLINEHOOKLIB_EXPORTS
 // 符号编译的。在使用此 DLL 的
@@ -17,14 +18,17 @@ class INLINEHOOKLIB_API InlineHook {
 public:
 	InlineHook();
 	~InlineHook();
-	bool install(PVOID pfunc, PVOID jmpPfunc);
+	bool install(PVOID funcAddr, PVOID jmpFuncAddr);
+	bool install(LPCWSTR dll, LPCSTR apiName, PVOID jmpFuncAddr);
 	bool uninstall();
 	bool suspend();
 	bool resume();
 private:
 	static const int JMP_LEN = 5;
 	enum STATUS { NOTHING, WORKING, SUSPEEDED };
+	HMODULE _hModule;
 	PVOID _addrFunc;
+	PVOID _addrJmp;
 	BYTE _oldBytes[JMP_LEN];
 	BYTE _jmpBytes[JMP_LEN];
 	STATUS _status;

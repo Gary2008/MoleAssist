@@ -1,13 +1,15 @@
-// InlineHookLib.cpp : 定义 DLL 应用程序的导出函数。
+// inlineHook.cpp : 定义 InlineHook 类。
 //
 
 #include "stdafx.h"
-#include "InlineHookLib.h"
-#include <vector>
+#include "InlineHook.h"
 
-// 有关类定义的信息，请参阅 InlineHookLib.h
+// 有关类定义的信息，请参阅 inlineHook.h
 inline InlineHook::InlineHook()
-	: _status(STATUS::NOTHING), _oldBytes{}, _jmpBytes{0xE9, 0, 0, 0, 0}
+	: _status(STATUS::NOTHING),
+	_addrFunc(nullptr), _addrJmp(nullptr),
+	_oldBytes{0, 0, 0, 0, 0}, _jmpBytes{0xE9, 0, 0, 0, 0},
+	_hModule(nullptr)
 {
     return;
 }
@@ -21,10 +23,27 @@ inline InlineHook::~InlineHook()
 	return;
 }
 
-bool InlineHook::install(PVOID pFunc, PVOID pJmpfunc)
+bool InlineHook::install(LPCWSTR dll, LPCSTR apiName, PVOID jmpFuncAddr)
+{
+	HMODULE hMoudle = LoadLibrary(dll);
+	if (hMoudle != nullptr)
+	{
+		PVOID funcAddr = (PVOID)GetProcAddress(hMoudle, apiName);
+		if (funcAddr == nullptr)
+		{
+			FreeLibrary(hMoudle);
+			return false;
+		}
+		_hModule = hMoudle;
+		return install(funcAddr, jmpFuncAddr);
+	}
+	return false;
+}
+
+bool InlineHook::install(PVOID funcAddr, PVOID jmpFuncAddr)
 {
 	//检查参数
-	if (pFunc == nullptr || pJmpfunc == nullptr)
+	if (funcAddr == nullptr || jmpFuncAddr == nullptr)
 	{
 		return false;
 	}
@@ -34,20 +53,20 @@ bool InlineHook::install(PVOID pFunc, PVOID pJmpfunc)
 		return false;
 	}
 	//准备工作
-	_addrFunc = pFunc;
-	(UINT&) _jmpBytes[1] = (UINT)pJmpfunc - (UINT)_addrFunc - 5;
+	(UINT&) _jmpBytes[1] = (UINT)jmpFuncAddr - (UINT)funcAddr - 5;
 	DWORD dwFlag;
 	//修改保护标志
-	if (VirtualProtect(_addrFunc, JMP_LEN, PAGE_EXECUTE_READWRITE, &dwFlag))
+	if (VirtualProtect(funcAddr, JMP_LEN, PAGE_EXECUTE_READWRITE, &dwFlag))
 	{
 		//保存入口
-		memcpy(_oldBytes, _addrFunc, JMP_LEN);
+		memcpy(_oldBytes, funcAddr, JMP_LEN);
 		//写入JMP
-		RtlCopyMemory(_addrFunc, _jmpBytes, JMP_LEN);
-		memcpy(_addrFunc, _jmpBytes, JMP_LEN);
+		memcpy(funcAddr, _jmpBytes, JMP_LEN);
 		//还原保护标志
 		VirtualProtect(_addrFunc, JMP_LEN, dwFlag, &dwFlag);
 		//改变标识
+		_addrFunc = funcAddr;
+		_addrJmp = jmpFuncAddr;
 		_status = STATUS::WORKING;
 		return true;
 	}
@@ -66,13 +85,18 @@ bool InlineHook::uninstall()
 	if (VirtualProtect(_addrFunc, JMP_LEN, PAGE_EXECUTE_READWRITE, &dwFlag))
 	{
 		//还原入口
-		memcpy(_oldBytes, _addrFunc, JMP_LEN);
+		memcpy(_addrFunc, _oldBytes, JMP_LEN);
 		//还原保护标志
 		VirtualProtect(_addrFunc, JMP_LEN, dwFlag, &dwFlag);
 		//重置
 		memset(_oldBytes, 0, JMP_LEN);
 		memset(_jmpBytes, 0, JMP_LEN);
 		_addrFunc = nullptr;
+		_addrJmp = nullptr;
+		if (_hModule != nullptr) {
+			FreeLibrary(_hModule);
+			_hModule = nullptr;
+		}
 		//改变标识
 		_status = STATUS::NOTHING;
 		return true;
